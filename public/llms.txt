@@ -1,0 +1,43 @@
+# Zero-Vector Design
+> A design philosophy for the age of AI.
+
+## About
+Zero-Vector Design is a methodology and open movement created by Erika Flowers. It provides principles, processes, and tools for building digital products with AI, where the creator's intent flows directly into the artifact with no intermediary, no translation layer, and no friction.
+
+## The Seven Principles
+1. Intent is the product — What you mean to build is what gets built.
+2. Craft compounds — Every decision is a layer of intent, and they stack.
+3. Context is architecture — Structure your knowledge and the AI becomes your hands.
+4. Ship the real thing — Prototypes are waste. Build what ships.
+5. Velocity demands integrity — Moving fast means knowing what you are building and why.
+6. Tools are temporary, principles are permanent — Frameworks change. Thinking endures.
+7. One person can move mountains — The right person with the right system changes everything.
+
+Principle Zero: Take from all that which is around you and make of it something more.
+
+## Key Pages
+- Homepage / Manifesto: https://zerovector.design/
+- Philosophy: https://zerovector.design/philosophy
+- The Approach: https://zerovector.design/approach
+- For Builders: https://zerovector.design/builders
+- For Leaders: https://zerovector.design/leaders
+- Media: https://zerovector.design/media
+- The Origin: https://zerovector.design/origin
+- The Open Vector: https://zerovector.design/open
+- Investiture (starter framework): https://zerovector.design/investiture
+- Get Started: https://zerovector.design/start
+
+## Creator
+Erika Flowers — 31 years in UX and service design, published sci-fi author, creator of Zero-Vector Design.
+- Website: https://helloerikaflowers.com
+- Substack: https://substack.com/@uxerika
+- LinkedIn: https://www.linkedin.com/in/uxerika/
+- GitHub: https://github.com/erikaflowers
+
+## Related Projects
+- Investiture: https://github.com/erikaflowers/investiture — Decoupled application scaffold for AI-assisted development
+- Fictioneer: https://getfictioneer.com — AI-powered story development platform (built with ZV principles)
+
+## License
+Content: CC BY-SA 4.0
+Code: MIT

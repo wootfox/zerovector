@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import { useInView } from '../hooks/useInView';
 import VectorField from '../components/VectorField';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
+import useSEO from '../hooks/useSEO';
 import en from '../content/en';
 
 function Animate({ children, className = '', delay = 0 }) {
@@ -18,7 +18,11 @@ function Animate({ children, className = '', delay = 0 }) {
 const { philosophy } = en;
 
 function PhilosophyPage() {
-  useEffect(() => { document.title = 'Philosophy — Zero-Vector Design'; }, []);
+  useSEO({
+    title: 'Philosophy',
+    description: 'The Zero-Vector philosophy: seven principles for building with AI where intent flows directly into the artifact. No intermediary. No translation layer.',
+    path: '/philosophy',
+  });
 
   return (
     <div className="zv-page zv-info-page">

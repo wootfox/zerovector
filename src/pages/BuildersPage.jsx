@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from '../hooks/useInView';
 import VectorField from '../components/VectorField';
@@ -6,6 +5,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
 import { ExternalLinkIcon, ArrowIcon } from '../components/icons';
+import useSEO from '../hooks/useSEO';
 import en from '../content/en';
 
 function Animate({ children, className = '', delay = 0 }) {
@@ -20,7 +20,11 @@ function Animate({ children, className = '', delay = 0 }) {
 const { builders } = en;
 
 function BuildersPage() {
-  useEffect(() => { document.title = 'For Builders — Zero-Vector Design'; }, []);
+  useSEO({
+    title: 'For Builders',
+    description: 'Fall in love with the problem, not the solution. A guide for designers, developers, and creators building with AI using Zero-Vector principles.',
+    path: '/builders',
+  });
 
   return (
     <div className="zv-page zv-info-page">

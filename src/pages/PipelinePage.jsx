@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import { useInView } from '../hooks/useInView';
 import VectorField from '../components/VectorField';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
+import useSEO from '../hooks/useSEO';
 import en from '../content/en';
 
 function Animate({ children, className = '', delay = 0 }) {
@@ -18,7 +18,11 @@ function Animate({ children, className = '', delay = 0 }) {
 const { approach } = en;
 
 function PipelinePage() {
-  useEffect(() => { document.title = 'Approach — Zero-Vector Design'; }, []);
+  useSEO({
+    title: 'The Approach',
+    description: 'The Zero-Vector approach to building products: eight phases from problem framing to shipping, with tool-agnostic methodology and AI-native practices.',
+    path: '/approach',
+  });
 
   return (
     <div className="zv-page zv-info-page">

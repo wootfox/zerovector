@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from '../hooks/useInView';
 import VectorField from '../components/VectorField';
@@ -6,6 +5,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
 import { ExternalLinkIcon, ArrowIcon } from '../components/icons';
+import useSEO from '../hooks/useSEO';
 import en from '../content/en';
 
 function Animate({ children, className = '', delay = 0 }) {
@@ -20,7 +20,11 @@ function Animate({ children, className = '', delay = 0 }) {
 const { start } = en;
 
 function StartPage() {
-  useEffect(() => { document.title = 'Get Started — Zero-Vector Design'; }, []);
+  useSEO({
+    title: 'Get Started',
+    description: 'Start building with Zero-Vector Design. Get Investiture, explore the Open Vector curriculum, and join the movement.',
+    path: '/start',
+  });
 
   return (
     <div className="zv-page zv-info-page">

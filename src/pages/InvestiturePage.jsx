@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useInView } from '../hooks/useInView';
+import useSEO from '../hooks/useSEO';
 import '../styles/site.css';
 import en from '../content/en';
 
@@ -22,8 +23,13 @@ function InvestiturePage() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  useSEO({
+    title: 'Investiture',
+    description: 'A decoupled, enterprise-ready application scaffold for AI-assisted development. Clone it, open Claude Code, start building. Architecture that teaches your AI to write clean code.',
+    path: '/investiture',
+  });
+
   useEffect(() => {
-    document.title = 'Investiture — Zero-Vector Design';
     document.body.style.background = '#0a1628';
     document.body.style.color = '#e8e0d0';
     document.body.style.margin = '0';

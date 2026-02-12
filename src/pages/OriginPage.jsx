@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
 import { useInView } from '../hooks/useInView';
 import VectorField from '../components/VectorField';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
 import { ExternalLinkIcon } from '../components/icons';
+import useSEO from '../hooks/useSEO';
 import en from '../content/en';
 
 function Animate({ children, className = '', delay = 0 }) {
@@ -19,7 +19,11 @@ function Animate({ children, className = '', delay = 0 }) {
 const { origin } = en;
 
 function OriginPage() {
-  useEffect(() => { document.title = 'The Origin — Zero-Vector Design'; }, []);
+  useSEO({
+    title: 'The Origin',
+    description: 'The story behind Zero-Vector Design. 31 years of UX and service design, AI experiments, and one question: what if one person could build the whole thing?',
+    path: '/origin',
+  });
 
   return (
     <div className="zv-page zv-info-page">

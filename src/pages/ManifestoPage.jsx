@@ -9,6 +9,7 @@ import DecryptText from '../components/DecryptText';
 import { ArrowIcon } from '../components/icons';
 import BootSequence from '../components/BootSequence';
 import NotifyForm from '../components/NotifyForm';
+import useSEO from '../hooks/useSEO';
 import en from '../content/en';
 
 function Animate({ children, className = '', delay = 0 }) {
@@ -172,9 +173,11 @@ function ManifestoPage() {
     });
   };
 
-  useEffect(() => {
-    document.title = 'Zero-Vector Design';
-  }, []);
+  useSEO({
+    title: 'Zero-Vector Design',
+    description: 'A design philosophy for the age of AI. No intermediary. No translation layer. No friction. From intent to artifact, directly.',
+    path: '/',
+  });
 
   return (
     <div className="zv-manifesto">

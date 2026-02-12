@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useInView } from '../hooks/useInView';
 import NotifyForm from '../components/NotifyForm';
+import useSEO from '../hooks/useSEO';
 import '../styles/site.css';
 import en from '../content/en';
 
@@ -23,8 +24,13 @@ function OpenVectorPage() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  useSEO({
+    title: 'The Open Vector',
+    description: 'A free, open curriculum for learning to build with AI. Five levels from apprentice to auteur. Launching March 2nd. Sign up to get notified.',
+    path: '/open',
+  });
+
   useEffect(() => {
-    document.title = 'The Open Vector — Zero-Vector Design';
     document.body.style.background = '#ffffff';
     document.body.style.color = '#0a0a0a';
     document.body.style.margin = '0';

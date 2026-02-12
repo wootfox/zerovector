@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
 import { useInView } from '../hooks/useInView';
 import VectorField from '../components/VectorField';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
 import { ExternalLinkIcon } from '../components/icons';
+import useSEO from '../hooks/useSEO';
 import en from '../content/en';
 
 function Animate({ children, className = '', delay = 0 }) {
@@ -19,7 +19,11 @@ function Animate({ children, className = '', delay = 0 }) {
 const { media } = en;
 
 function ReadingPage() {
-  useEffect(() => { document.title = 'Media — Zero-Vector Design'; }, []);
+  useSEO({
+    title: 'Media',
+    description: 'Articles, books, podcast episodes, and talks on Zero-Vector Design, AI-native product development, and the future of building.',
+    path: '/media',
+  });
 
   return (
     <div className="zv-page zv-info-page">

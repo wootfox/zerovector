@@ -3,6 +3,7 @@ import VectorField from '../components/VectorField';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
+import useSEO from '../hooks/useSEO';
 
 const QUESTIONS = [
   { id: 'q1', label: '01', question: 'How do you go from idea to shipped product?', placeholder: 'Describe your typical workflow from concept to launch...' },
@@ -17,9 +18,11 @@ function QuizPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-  useEffect(() => {
-    document.title = 'Am I Vibe Coding? — Zero-Vector Design';
-  }, []);
+  useSEO({
+    title: 'Am I Vibe Coding?',
+    description: 'Take the quiz. Describe your workflow and find out if you are vibe coding or building with intent. AI-scored assessment from Zero-Vector Design.',
+    path: '/quiz',
+  });
 
   const updateAnswer = (id, value) => {
     setAnswers(prev => ({ ...prev, [id]: value }));

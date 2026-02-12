@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import VectorField from '../components/VectorField';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import useSEO from '../hooks/useSEO';
 
 function AskPage() {
   const [messages, setMessages] = useState([]);
@@ -11,9 +12,11 @@ function AskPage() {
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
-  useEffect(() => {
-    document.title = 'Ask the Manifesto — Zero-Vector Design';
-  }, []);
+  useSEO({
+    title: 'Ask the Manifesto',
+    description: 'Talk directly to the Zero-Vector manifesto. Ask questions about design philosophy, AI-native building, and the principles behind Zero-Vector Design.',
+    path: '/ask',
+  });
 
   // Boot sequence
   useEffect(() => {

@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import { useInView } from '../hooks/useInView';
 import VectorField from '../components/VectorField';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
+import useSEO from '../hooks/useSEO';
 import en from '../content/en';
 
 function Animate({ children, className = '', delay = 0 }) {
@@ -18,7 +18,11 @@ function Animate({ children, className = '', delay = 0 }) {
 const { leaders } = en;
 
 function LeadersPage() {
-  useEffect(() => { document.title = 'For Leaders — Zero-Vector Design'; }, []);
+  useSEO({
+    title: 'For Leaders',
+    description: 'How Zero-Vector Design helps executives and design leaders transform their organizations. Engagement models, the CZVO role, and strategic AI adoption.',
+    path: '/leaders',
+  });
 
   return (
     <div className="zv-page zv-info-page">
