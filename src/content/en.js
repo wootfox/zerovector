@@ -1032,7 +1032,7 @@ const en = {
 
     hero: {
       label: 'A Zero-Vector Scaffold',
-      title: ['Build Real', 'Things', 'With AI'],
+      title: ['Build Real', 'Things'],
       subtitle: 'Architecture that teaches your AI to write clean code. Clone it. Open Claude Code. Start building.',
       badge: 'Free & Open Source',
     },
