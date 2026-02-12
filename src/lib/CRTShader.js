@@ -19,8 +19,8 @@
 export class CRTShader {
   constructor(glCanvas, config = {}) {
     this.canvas = glCanvas;
-    this.gl = glCanvas.getContext('webgl2', { alpha: true, premultipliedAlpha: false })
-           || glCanvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
+    this.gl = glCanvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true })
+           || glCanvas.getContext('webgl', { alpha: true, premultipliedAlpha: true });
 
     if (!this.gl) {
       console.error('CRTShader: WebGL not supported');
@@ -94,23 +94,29 @@ export class CRTShader {
           return;
         }
 
-        // --- Sample source with alpha ---
+        // --- Sample source alpha ---
+        // 2D canvas stores premultiplied alpha. A line drawn at rgba(0,255,255,0.07)
+        // is stored as rgb ~(0, 18, 18) with alpha 0.07. We un-premultiply to get
+        // the true color, apply CRT effects, then output at visible alpha.
         vec4 src = texture2D(u_texture, uv);
         float srcAlpha = src.a;
 
-        // Early out for fully transparent pixels — skip all CRT processing
-        if (srcAlpha < 0.005) {
+        // Early out for fully transparent pixels
+        if (srcAlpha < 0.003) {
           gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
           return;
         }
 
-        // --- Chromatic aberration (RGB split) ---
-        vec3 col;
-        col.r = texture2D(u_texture, uv + vec2(u_aberration, 0.0)).r;
-        col.g = texture2D(u_texture, uv).g;
-        col.b = texture2D(u_texture, uv - vec2(u_aberration, 0.0)).b;
+        // Un-premultiply to recover true colors
+        float invAlpha = 1.0 / max(srcAlpha, 0.004);
 
-        // --- Bloom (sample neighbors for phosphor glow bleed) ---
+        // --- Chromatic aberration (RGB split) — un-premultiplied ---
+        vec3 col;
+        col.r = texture2D(u_texture, uv + vec2(u_aberration, 0.0)).r * invAlpha;
+        col.g = src.g * invAlpha;
+        col.b = texture2D(u_texture, uv - vec2(u_aberration, 0.0)).b * invAlpha;
+
+        // --- Bloom (sample neighbors) — un-premultiplied ---
         vec2 px = 1.0 / u_resolution;
         vec3 bloomCol = vec3(0.0);
         bloomCol += texture2D(u_texture, uv + vec2(px.x, 0.0)).rgb;
@@ -121,15 +127,15 @@ export class CRTShader {
         bloomCol += texture2D(u_texture, uv - vec2(px.x, px.y)).rgb;
         bloomCol += texture2D(u_texture, uv + vec2(px.x, -px.y)).rgb;
         bloomCol += texture2D(u_texture, uv - vec2(px.x, -px.y)).rgb;
-        bloomCol *= 0.125;
+        bloomCol *= 0.125 * invAlpha;
         col += bloomCol * u_bloom;
 
-        // --- Scanlines (horizontal dark bands) ---
+        // --- Scanlines ---
         float scan = sin(uv.y * u_scanlineCount + u_time * 1.5) * 0.5 + 0.5;
         scan = pow(scan, 1.5);
         col *= 1.0 - u_scanline * (1.0 - scan);
 
-        // --- Phosphor mask (aperture grille — RGB vertical stripes) ---
+        // --- Phosphor mask ---
         float maskX = mod(gl_FragCoord.x, 6.0);
         vec3 mask = vec3(0.75);
         if (maskX < 2.0) mask.r = 1.0;
@@ -137,15 +143,15 @@ export class CRTShader {
         else mask.b = 1.0;
         col *= mix(vec3(1.0), mask, u_phosphor);
 
-        // --- Vignette (CRT edge falloff) ---
+        // --- Vignette ---
         vec2 vig = uv * (1.0 - uv);
         float vigFactor = vig.x * vig.y * 15.0;
         vigFactor = pow(vigFactor, u_vignette);
         col *= vigFactor;
 
-        // --- Static noise (only where content exists) ---
+        // --- Static noise ---
         float n = fract(sin(dot(uv + vec2(u_time * 0.17), vec2(12.9898, 78.233))) * 43758.5453);
-        col += (n - 0.5) * u_noise * srcAlpha;
+        col += (n - 0.5) * u_noise;
 
         // --- Flicker ---
         col *= 1.0 + u_flicker * sin(u_time * 8.0);
@@ -153,7 +159,12 @@ export class CRTShader {
         // --- Brightness ---
         col *= u_brightness;
 
-        gl_FragColor = vec4(col, srcAlpha);
+        // Output alpha: content pixels become visible, empty stay transparent.
+        // srcAlpha ~0.07 for a line → smoothstep maps to ~1.0.
+        // srcAlpha ~0.0 for empty → stays 0.0.
+        float outAlpha = smoothstep(0.0, 0.04, srcAlpha);
+
+        gl_FragColor = vec4(col * outAlpha, outAlpha);
       }
     `;
 
@@ -238,7 +249,7 @@ export class CRTShader {
 
     gl.viewport(0, 0, this.canvas.width, this.canvas.height);
     gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.useProgram(this.program);
