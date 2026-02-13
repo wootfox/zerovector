@@ -397,7 +397,7 @@ function ManifestoPage() {
               className="zv-featured-article"
             >
               <span className="zv-featured-article-badge">New</span>
-              <span className="zv-featured-article-title">Zero-Vector Design: You Will Move</span>
+              <span className="zv-featured-article-title">Zero-Vector Design: You Will Move Planets</span>
               <span className="zv-featured-article-cta">Read on Substack &rarr;</span>
             </a>
           </Animate>

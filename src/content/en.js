@@ -985,7 +985,7 @@ const en = {
     ],
 
     announcement: {
-      title: 'Zero-Vector Design: You Will Move',
+      title: 'Zero-Vector Design: You Will Move Planets',
       description: 'The article that introduces Zero-Vector Design. What it is, why it exists, and what it means for the future of making things.',
       cta: 'Read on Substack',
       url: 'https://open.substack.com/pub/eflowers/p/zero-vector-design-you-will-move',
