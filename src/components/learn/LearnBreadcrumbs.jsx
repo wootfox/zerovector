@@ -11,8 +11,9 @@ function LearnBreadcrumbs({ levelSlug, lessonSlug, levels, guideSlug, approach }
   const lesson = level?.lessons.find(l => l.slug === lessonSlug);
   const guide = isApproach && guideSlug ? approach?.guides?.find(g => g.slug === guideSlug) : null;
 
-  // Hub page — no breadcrumbs
-  if (!isCurriculum && !isResources && !isChat && !isApproach) return null;
+  // Hub page and chat — no breadcrumbs
+  if (isChat) return null;
+  if (!isCurriculum && !isResources && !isApproach) return null;
 
   return (
     <nav className="ovl-breadcrumbs" aria-label="Breadcrumb">
