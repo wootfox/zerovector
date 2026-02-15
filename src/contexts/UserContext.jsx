@@ -1,36 +1,62 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 
 const UserContext = createContext(null);
 
-const MOCK_USER = {
-  name: 'Open Vector Learner',
-  email: 'learner@example.com',
-  avatar: null,
-};
+function mapUser(supabaseUser) {
+  if (!supabaseUser) return null;
+  return {
+    id: supabaseUser.id,
+    name: supabaseUser.user_metadata?.full_name || supabaseUser.email?.split('@')[0] || 'Learner',
+    email: supabaseUser.email,
+    avatar: supabaseUser.user_metadata?.avatar_url || null,
+  };
+}
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    try {
-      const saved = localStorage.getItem('ovl-user');
-      return saved ? JSON.parse(saved) : null;
-    } catch {
-      return null;
-    }
-  });
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const signIn = useCallback(() => {
-    // Stub: future — replace with Google OAuth flow
-    setUser(MOCK_USER);
-    localStorage.setItem('ovl-user', JSON.stringify(MOCK_USER));
+  useEffect(() => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
+
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session ? mapUser(session.user) : null);
+      setLoading(false);
+    });
+
+    // Listen for auth changes (sign in, sign out, token refresh)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session ? mapUser(session.user) : null);
+      setLoading(false);
+    });
+
+    // Clean up orphaned mock auth key from the old stub
+    localStorage.removeItem('ovl-user');
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const signOut = useCallback(() => {
+  const signIn = useCallback(() => {
+    if (!supabase) return;
+    supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.href },
+    });
+  }, []);
+
+  const signOut = useCallback(async () => {
+    if (!supabase) return;
+    await supabase.auth.signOut();
     setUser(null);
-    localStorage.removeItem('ovl-user');
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, isLoggedIn: !!user, signIn, signOut }}>
+    <UserContext.Provider value={{ user, isLoggedIn: !!user, loading, signIn, signOut }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,12 +1,20 @@
 import { useUser } from '../../contexts/UserContext';
 
 export function SignInButton() {
-  const { user, isLoggedIn, signIn, signOut } = useUser();
+  const { user, isLoggedIn, loading, signIn, signOut } = useUser();
+
+  if (loading) {
+    return <span className="ovl-signin-loading" />;
+  }
 
   if (isLoggedIn) {
     return (
       <div className="ovl-user-menu">
-        <span className="ovl-user-avatar">{user.name.charAt(0)}</span>
+        {user.avatar ? (
+          <img src={user.avatar} alt={user.name} className="ovl-user-avatar ovl-user-avatar--img" referrerPolicy="no-referrer" />
+        ) : (
+          <span className="ovl-user-avatar">{user.name.charAt(0)}</span>
+        )}
         <button className="ovl-signout-btn" onClick={signOut}>Sign Out</button>
       </div>
     );
@@ -18,9 +26,9 @@ export function SignInButton() {
 }
 
 export function SignInPrompt() {
-  const { isLoggedIn, signIn } = useUser();
+  const { isLoggedIn, loading, signIn } = useUser();
 
-  if (isLoggedIn) return null;
+  if (loading || isLoggedIn) return null;
 
   return (
     <div className="ovl-signin-prompt">

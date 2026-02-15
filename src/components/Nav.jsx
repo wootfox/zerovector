@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useUser } from '../contexts/UserContext';
 
 
 const navLinks = [
@@ -16,6 +17,8 @@ const navLinks = [
 function Nav() {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, isLoggedIn, loading, signIn, signOut } = useUser();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
     <nav className="zv-nav">
@@ -39,6 +42,37 @@ function Nav() {
           >
             Start
           </Link>
+          {!loading && (
+            isLoggedIn ? (
+              <div className="zv-nav-user">
+                <button
+                  className="zv-nav-avatar-btn"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  aria-label="User menu"
+                >
+                  {user.avatar ? (
+                    <img src={user.avatar} alt={user.name} className="zv-nav-avatar-img" referrerPolicy="no-referrer" />
+                  ) : (
+                    <span className="zv-nav-avatar-initial">{user.name.charAt(0)}</span>
+                  )}
+                </button>
+                {dropdownOpen && (
+                  <>
+                    <div className="zv-nav-dropdown-backdrop" onClick={() => setDropdownOpen(false)} />
+                    <div className="zv-nav-dropdown">
+                      <div className="zv-nav-dropdown-name">{user.name}</div>
+                      <div className="zv-nav-dropdown-email">{user.email}</div>
+                      <button className="zv-nav-dropdown-signout" onClick={() => { signOut(); setDropdownOpen(false); }}>
+                        Sign Out
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            ) : (
+              <button className="zv-nav-signin" onClick={signIn}>Sign In</button>
+            )
+          )}
         </div>
 
         {/* Mobile hamburger */}
@@ -73,6 +107,22 @@ function Nav() {
           >
             Start
           </Link>
+          {!loading && !isLoggedIn && (
+            <button
+              className="zv-nav-mobile-link zv-nav-mobile-signin"
+              onClick={() => { signIn(); setMenuOpen(false); }}
+            >
+              Sign In with Google
+            </button>
+          )}
+          {!loading && isLoggedIn && (
+            <button
+              className="zv-nav-mobile-link zv-nav-mobile-signout"
+              onClick={() => { signOut(); setMenuOpen(false); }}
+            >
+              Sign Out ({user.name.split(' ')[0]})
+            </button>
+          )}
         </div>
       )}
     </nav>
