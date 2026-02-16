@@ -5708,8 +5708,8 @@ a:hover {
 
 /* --- Page Shell --- */
 
-.ovl-page {
-  /* ---- OVL Theme Variables ---- */
+/* ---- OVL Theme Variables (on :root so ThemeContext inline styles can override) ---- */
+:root {
   --ovl-bg: #ffffff;
   --ovl-bg-elevated: #ffffff;
   --ovl-bg-surface: #f5f5f5;
@@ -5725,7 +5725,9 @@ a:hover {
   --ovl-border-strong: rgba(0, 0, 0, 0.15);
   --ovl-success: #00aa44;
   --ovl-nav-bg: rgba(255, 255, 255, 0.92);
+}
 
+.ovl-page {
   background: var(--ovl-bg);
   color: var(--ovl-text);
   min-height: 100vh;
