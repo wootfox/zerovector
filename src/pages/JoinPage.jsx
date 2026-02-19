@@ -75,6 +75,7 @@ function JoinField({ field, value, onChange, error }) {
       </label>
       {field.hint && <span className="zv-join-hint">{field.hint}</span>}
       {input}
+      {field.hintBelow && <span className="zv-join-hint">{field.hintBelow}</span>}
       {error && <span className="zv-join-error-text">{error}</span>}
     </div>
   );
@@ -91,6 +92,22 @@ function RoleCard({ role, selected, onSelect }) {
       <h3>{role.title}</h3>
       <p>{role.description}</p>
     </button>
+  );
+}
+
+function RoleDetail({ role }) {
+  if (!role) return null;
+  return (
+    <div className="zv-join-role-detail">
+      <div className="zv-join-role-detail-inner">
+        <p className="zv-join-role-detail-desc">{role.fullDescription}</p>
+        {role.bullets && (
+          <ul className="zv-join-role-detail-bullets">
+            {role.bullets.map((b, i) => <li key={i}>{b}</li>)}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -164,7 +181,7 @@ function JoinPage() {
     if (!selectedRole) errs._role = 'Please select a role.';
 
     // Common required
-    const allSections = [join.whoYouAre, join.enduranceTest];
+    const allSections = [join.whoYouAre, join.enduranceTest, join.final];
     for (const section of allSections) {
       for (const field of section.fields) {
         if (field.required && (!formData[field.name] || !String(formData[field.name]).trim())) {
@@ -278,6 +295,15 @@ function JoinPage() {
               <cite>{join.quote.attribution}</cite>
             </blockquote>
           </Animate>
+          <Animate delay={1}>
+            <p className="zv-join-book-note">
+              {join.bookNote.text}{' '}
+              <a href={join.bookNote.linkUrl} target="_blank" rel="noopener noreferrer">
+                {join.bookNote.linkText}
+              </a>{' '}
+              {join.bookNote.suffix}
+            </p>
+          </Animate>
         </div>
       </section>
 
@@ -336,6 +362,9 @@ function JoinPage() {
                 />
               </Animate>
             ))}
+          </div>
+          <div className={`zv-join-role-detail-wrapper ${selectedRole ? 'zv-join-role-detail-wrapper--open' : ''}`}>
+            <RoleDetail role={join.roles.find(r => r.id === selectedRole)} />
           </div>
           {errors._role && <p className="zv-join-error">{errors._role}</p>}
         </div>

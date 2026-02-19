@@ -8,6 +8,13 @@ const join = {
     attribution: '\u2014 Ernest Shackleton, 1914 (apocryphal)',
   },
 
+  bookNote: {
+    text: 'If the name Shackleton means nothing to you yet, consider picking up',
+    linkText: 'Endurance: Shackleton\u2019s Incredible Voyage',
+    linkUrl: 'https://www.amazon.com/Endurance-Shackletons-Incredible-Alfred-Lansing/dp/B000BZ9A7S',
+    suffix: 'by Alfred Lansing. It will help you understand the spirit of this application \u2014 and what we are looking for in crew.',
+  },
+
   intro: [
     'Zero Vector is building something new. Not a product. Not a company. A **discipline** \u2014 a way of working where design intent and code execution share the same moment. Open source. Open methodology. Built in public.',
     'We are looking for crew, not employees. These are volunteer positions with a real mission, real standards, and real autonomy. You will work directly with the founder. You will shape something that does not exist yet. The pay is zero and the hours are yours to define.',
@@ -30,10 +37,58 @@ const join = {
   },
 
   roles: [
-    { id: 'framework', title: 'Framework Engineer', description: 'Evolve Investiture into a robust, adoptable scaffold. Quickstarts, boilerplates, documentation, refinement.' },
-    { id: 'curriculum', title: 'Curriculum Steward', description: 'Own the Open Vector learning center. Edit, expand, improve. Make it a living resource, not a static wiki.' },
-    { id: 'evangelist', title: 'ZV Evangelist', description: 'Get Zero Vector in front of the world. Articles, podcasts, case studies, conference submissions, partnerships.' },
-    { id: 'funding', title: 'Funding Scout', description: 'Find grants, partnerships, and funding that sustain the mission without surrendering control of it.' },
+    {
+      id: 'framework',
+      title: 'Framework Engineer',
+      description: 'Evolve Investiture into a robust, adoptable scaffold. Quickstarts, boilerplates, documentation, refinement.',
+      fullDescription: 'You help build the kernel. Investiture is the open scaffold that makes Zero Vector actually work, and right now it needs to evolve from \u201Cone person\u2019s build system\u201D to \u201Ca framework anyone can adopt.\u201D You should be comfortable reading and writing code (not necessarily expert-level, but fluent), opinionated about developer experience, and genuinely excited about making tools that make other people faster. Think: early Rails contributor energy.',
+      bullets: [
+        'Develop quickstart templates for common project types (React, Node, Python, etc.)',
+        'Refine framework conventions, file structure standards, and documentation',
+        'Build boilerplate generators so new practitioners go from zero to structured repo in minutes',
+        'Stress-test Investiture by using it on real projects and filing what breaks',
+        'Collaborate directly with the founder on architecture decisions',
+      ],
+    },
+    {
+      id: 'curriculum',
+      title: 'Curriculum Steward',
+      description: 'Own the Open Vector learning center. Edit, expand, improve. Make it a living resource, not a static wiki.',
+      fullDescription: 'You are the editor-in-chief of the learning center. Open Vector is the free curriculum that teaches Zero Vector principles, and it needs someone who treats it like a living product, not a static wiki. You should have a background in education, content strategy, or instructional design. You care about whether people actually learn, not just whether the page exists.',
+      bullets: [
+        'Edit and refine existing Open Vector content for clarity and pedagogical flow',
+        'Identify gaps in the learning path and commission or write new material',
+        'Improve information architecture and navigation across the learning center',
+        'Monitor engagement to understand what\u2019s landing and what needs rework',
+        'Keep curriculum current as the methodology evolves',
+      ],
+    },
+    {
+      id: 'evangelist',
+      title: 'ZV Evangelist',
+      description: 'Get Zero Vector in front of the world. Articles, podcasts, case studies, conference submissions, partnerships.',
+      fullDescription: 'Your job is making Zero Vector so visible and so well-articulated that the right people cannot ignore it. You pitch editors, book guest appearances, coordinate case study production with practitioners, and help shape the public narrative. The north star: ZV becomes a recognized discipline, not a niche blog. You should have experience in PR, developer relations, content marketing, or community building. You know how to get ideas into rooms where decisions get made.',
+      bullets: [
+        'Pitch editors, podcast hosts, and conference organizers',
+        'Book guest appearances and coordinate speaking opportunities',
+        'Produce case studies with real practitioners using the methodology',
+        'Shape the public narrative around design-led engineering with AI',
+        'Build relationships with publications, communities, and industry voices',
+      ],
+    },
+    {
+      id: 'funding',
+      title: 'Funding Scout',
+      description: 'Find grants, partnerships, and funding that sustain the mission without surrendering control of it.',
+      fullDescription: 'You help us find money that does not cost us the mission. Grants, no-strings partnerships, innovation funds, accelerator programs that trade visibility for involvement rather than control. We will take less money to maintain ownership. We will share credit generously. But we will not hand over strategic direction to someone who does not understand what we are building. You should know the landscape of grants (NEA, NSF, Mozilla, indie fund programs), understand term sheets well enough to spot poison pills, and believe that open source and sustainability are not mutually exclusive.',
+      bullets: [
+        'Research and identify grants, innovation funds, and non-dilutive funding programs',
+        'Evaluate opportunities for mission alignment and control implications',
+        'Draft proposals and applications for qualified funding sources',
+        'Vet term sheets and partnership structures for poison pills',
+        'Build a pipeline of sustainable funding that preserves independence',
+      ],
+    },
   ],
 
   whoYouAre: {
@@ -41,11 +96,11 @@ const join = {
     subtitle: 'The basics.',
     fields: [
       { name: 'name', label: 'Name', type: 'text', required: true, inline: 'left' },
-      { name: 'pronouns', label: 'Pronouns', type: 'text', placeholder: 'e.g. she/her, they/them', inline: 'right' },
+      { name: 'pronouns', label: 'Pronouns', type: 'text', required: true, placeholder: 'e.g. she/her, they/them', inline: 'right' },
       { name: 'email', label: 'Email', type: 'email', required: true, inline: 'left' },
-      { name: 'location', label: 'Location', type: 'text', hint: 'City, country. Remote is fine. Time zone matters.', inline: 'right' },
+      { name: 'location', label: 'Location', type: 'text', required: true, hintBelow: 'City, country. Remote is fine. Time zone matters.', inline: 'right' },
       { name: 'portfolio', label: 'Link to your work', type: 'url', required: true, hint: 'Portfolio, GitHub, LinkedIn, personal site, published writing. Whatever shows us who you are.' },
-      { name: 'portfolio2', label: 'Second link (optional)', type: 'url' },
+      { name: 'portfolio2', label: 'Second link', type: 'url', required: true },
     ],
   },
 
@@ -63,7 +118,7 @@ const join = {
         { value: '8-15', label: '8\u201315 hours' },
         { value: '15+', label: '15+ hours' },
       ]},
-      { name: 'runway', label: 'How long are you willing to work for free before deciding this is not worth it?', type: 'select', hint: 'There is no wrong answer. There is an honest one.', options: [
+      { name: 'runway', label: 'How long are you willing to work for free before deciding this is not worth it?', type: 'select', required: true, hint: 'There is no wrong answer. There is an honest one.', options: [
         { value: '1month', label: 'About a month' },
         { value: '3months', label: '3 months' },
         { value: '6months', label: '6 months' },
@@ -81,7 +136,7 @@ const join = {
         { name: 'fw_stack', label: 'What is your primary tech stack?', type: 'textarea', size: 'short', required: true, hint: 'Languages, frameworks, tools you reach for first.' },
         { name: 'fw_oss', label: 'Have you contributed to an open source project?', type: 'textarea', required: true, hint: 'Link to a PR, issue, or repo. If not, describe the closest equivalent (internal tooling, shared libraries, etc).' },
         { name: 'fw_investiture', label: 'Investiture is a scaffold for AI-assisted development. What does that mean to you?', type: 'textarea', size: 'long', required: true, hint: 'If you have looked at the framework, tell us what you think it gets right and wrong. If you have not, tell us what you would expect it to contain.' },
-        { name: 'fw_dx', label: 'Describe the best developer experience you have ever encountered and what made it good.', type: 'textarea', size: 'short' },
+        { name: 'fw_dx', label: 'Describe the best developer experience you have ever encountered and what made it good.', type: 'textarea', size: 'short', required: true },
       ],
     },
     curriculum: {
@@ -90,8 +145,8 @@ const join = {
       fields: [
         { name: 'cur_sample', label: 'Link to something you have written, edited, or curated that you are proud of.', type: 'url', required: true, hint: 'An article, a course, a documentation site, a resource collection. Something that shows how you think about teaching.' },
         { name: 'cur_scenario', label: 'You inherit a learning site with 30 pages of content, inconsistent formatting, and no clear learning path. What do you do first?', type: 'textarea', size: 'long', required: true, hint: 'Walk us through your first 48 hours.' },
-        { name: 'cur_philosophy', label: 'What is the difference between content that exists and content that teaches?', type: 'textarea', size: 'short' },
-        { name: 'cur_technical', label: 'Are you comfortable working in markdown, Git, and static site generators?', type: 'select', options: [
+        { name: 'cur_philosophy', label: 'What is the difference between content that exists and content that teaches?', type: 'textarea', size: 'short', required: true },
+        { name: 'cur_technical', label: 'Are you comfortable working in markdown, Git, and static site generators?', type: 'select', required: true, options: [
           { value: 'fluent', label: 'Yes, fluent' },
           { value: 'learning', label: 'Learning, but can manage' },
           { value: 'no', label: 'No, but willing to learn' },
@@ -115,7 +170,7 @@ const join = {
         { name: 'fund_experience', label: 'Have you ever secured a grant, investment, or non-dilutive funding for a project?', type: 'textarea', required: true, hint: 'Describe the project, the amount, and the source. If not, describe the closest equivalent experience.' },
         { name: 'fund_sources', label: 'Name 3 specific funding sources (grants, programs, foundations) that could apply to an open-source design methodology project and explain why each fits.', type: 'textarea', size: 'long', required: true, hint: 'This tests whether you actually know the landscape or are guessing.' },
         { name: 'fund_scenario', label: 'A funder offers $100K but wants a board seat and approval rights over the open source license. What do you advise?', type: 'textarea', required: true },
-        { name: 'fund_philosophy', label: 'What does \u201Ctake less to maintain control\u201D mean to you in practice?', type: 'textarea', size: 'short' },
+        { name: 'fund_philosophy', label: 'What does \u201Ctake less to maintain control\u201D mean to you in practice?', type: 'textarea', size: 'short', required: true },
       ],
     },
   },
@@ -123,8 +178,8 @@ const join = {
   final: {
     title: 'Last thing',
     fields: [
-      { name: 'anything_else', label: 'Anything else you want us to know?', type: 'textarea', size: 'short', hint: 'This box is optional. Use it or do not. Silence is also an answer.' },
-      { name: 'source', label: 'How did you find us?', type: 'select', options: [
+      { name: 'anything_else', label: 'Anything else you want us to know?', type: 'textarea', size: 'short', required: true, hint: 'Use this however you want. A sentence is fine. A manifesto is fine. Show us how you think.' },
+      { name: 'source', label: 'How did you find us?', type: 'select', required: true, options: [
         { value: 'linkedin', label: 'LinkedIn' },
         { value: 'substack', label: 'Substack' },
         { value: 'referral', label: 'Someone told me' },

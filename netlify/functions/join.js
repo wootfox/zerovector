@@ -21,13 +21,13 @@ function checkRate(ip) {
 }
 
 const VALID_ROLES = ['framework', 'curriculum', 'evangelist', 'funding'];
-const COMMON_REQUIRED = ['name', 'email', 'portfolio', 'why_this', 'built_unpaid', 'endurance_story', 'ai_relationship', 'hours'];
+const COMMON_REQUIRED = ['name', 'pronouns', 'email', 'location', 'portfolio', 'portfolio2', 'why_this', 'built_unpaid', 'endurance_story', 'ai_relationship', 'hours', 'runway', 'anything_else', 'source'];
 
 const ROLE_REQUIRED = {
-  framework: ['fw_stack', 'fw_oss', 'fw_investiture'],
-  curriculum: ['cur_sample', 'cur_scenario'],
+  framework: ['fw_stack', 'fw_oss', 'fw_investiture', 'fw_dx'],
+  curriculum: ['cur_sample', 'cur_scenario', 'cur_philosophy', 'cur_technical'],
   evangelist: ['ev_win', 'ev_pitch', 'ev_targets', 'ev_network'],
-  funding: ['fund_experience', 'fund_sources', 'fund_scenario'],
+  funding: ['fund_experience', 'fund_sources', 'fund_scenario', 'fund_philosophy'],
 };
 
 const ROLE_FIELDS = {
@@ -110,20 +110,20 @@ export default async (req) => {
     const row = {
       role: body.role,
       name: String(body.name).trim(),
-      pronouns: body.pronouns ? String(body.pronouns).trim() : null,
+      pronouns: String(body.pronouns).trim(),
       email,
-      location: body.location ? String(body.location).trim() : null,
+      location: String(body.location).trim(),
       portfolio: String(body.portfolio).trim(),
-      portfolio2: body.portfolio2 ? String(body.portfolio2).trim() : null,
+      portfolio2: String(body.portfolio2).trim(),
       why_this: String(body.why_this).trim(),
       built_unpaid: String(body.built_unpaid).trim(),
       endurance_story: String(body.endurance_story).trim(),
       ai_relationship: String(body.ai_relationship).trim(),
       hours: body.hours,
-      runway: body.runway || null,
+      runway: body.runway,
       role_answers: roleAnswers,
-      anything_else: body.anything_else ? String(body.anything_else).trim() : null,
-      source: body.source || null,
+      anything_else: String(body.anything_else).trim(),
+      source: body.source,
       ip_hash: hashIP(ip),
       submitted_at: new Date().toISOString(),
     };

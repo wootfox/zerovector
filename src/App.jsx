@@ -16,6 +16,7 @@ import StartPage from './pages/StartPage';
 import NamePage from './pages/NamePage';
 import EnterprisePage from './pages/EnterprisePage';
 import JoinPage from './pages/JoinPage';
+import AdminPage from './pages/AdminPage';
 import LearnEnterprisePage from './pages/learn/LearnEnterprisePage';
 import NotFoundPage from './pages/NotFoundPage';
 import LearnHubPage from './pages/learn/LearnHubPage';
@@ -74,6 +75,7 @@ function App() {
         <Route path="enterprise" element={<LearnEnterprisePage />} />
       </Route>
       <Route path="/investiture" element={<InvestiturePage />} />
+      <Route path="/admin" element={<AdminPage />} />
     </Routes>
   );
 }
