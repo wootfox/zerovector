@@ -15,6 +15,7 @@ import QuizPage from './pages/QuizPage';
 import StartPage from './pages/StartPage';
 import NamePage from './pages/NamePage';
 import EnterprisePage from './pages/EnterprisePage';
+import JoinPage from './pages/JoinPage';
 import LearnEnterprisePage from './pages/learn/LearnEnterprisePage';
 import NotFoundPage from './pages/NotFoundPage';
 import LearnHubPage from './pages/learn/LearnHubPage';
@@ -49,7 +50,7 @@ function App() {
         <Route path="/name" element={<NamePage />} />
         {/* Redirects from old routes */}
         <Route path="/about" element={<Navigate to="/philosophy" replace />} />
-        <Route path="/join" element={<Navigate to="/" replace />} />
+        <Route path="/join" element={<JoinPage />} />
         <Route path="/pipeline" element={<Navigate to="/approach" replace />} />
         <Route path="/reading" element={<Navigate to="/media" replace />} />
         <Route path="/resources" element={<Navigate to="/media" replace />} />

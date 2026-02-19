@@ -23,6 +23,7 @@ import quiz from './quiz';
 import investiture from './investiture';
 import name from './name';
 import enterprise from './enterprise';
+import join from './join';
 import learn from './learn';
 
 const en = {
@@ -33,6 +34,7 @@ const en = {
   builders,
   leaders,
   enterprise,
+  join,
   media,
   origin,
   open,

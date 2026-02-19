@@ -126,6 +126,12 @@ function Nav() {
             <span className="zv-nav-support-heart">&hearts;</span> Support
           </a>
           <Link
+            to="/join"
+            className={`zv-nav-link zv-nav-join ${pathname === '/join' ? 'zv-nav-link-active' : ''}`}
+          >
+            Join Us
+          </Link>
+          <Link
             to="/start"
             className={`zv-nav-start ${pathname === '/start' ? 'zv-nav-start-active' : ''}`}
           >
@@ -221,6 +227,13 @@ function Nav() {
           >
             <span className="zv-nav-support-heart">&hearts;</span> Support
           </a>
+          <Link
+            to="/join"
+            className={`zv-nav-mobile-link zv-nav-join-mobile ${pathname === '/join' ? 'zv-nav-link-active' : ''}`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Join Us
+          </Link>
           <Link
             to="/start"
             className={`zv-nav-mobile-link zv-nav-start-mobile ${pathname === '/start' ? 'zv-nav-link-active' : ''}`}
