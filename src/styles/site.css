@@ -3507,6 +3507,31 @@ a:hover {
   }
 }
 
+/* Card actions */
+.zv-admin-card-actions {
+  padding-top: 16px;
+  border-top: 1px solid var(--void-border);
+  margin-top: 16px;
+}
+
+.zv-admin-download-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--void-border);
+  border-radius: 3px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.zv-admin-download-btn:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
 /* Kestrel activity table */
 .zv-admin-kestrel-table-wrap {
   overflow-x: auto;

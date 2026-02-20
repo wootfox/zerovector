@@ -79,6 +79,65 @@ function StatusBar({ app, onStatusChange }) {
   );
 }
 
+/* ── Markdown Export ── */
+
+function applicationToMarkdown(app) {
+  const roleAnswers = app.role_answers || {};
+  const lines = [
+    `# Application: ${app.name}`,
+    '',
+    `- **Role:** ${ROLE_TITLES[app.role] || app.role}`,
+    `- **Email:** ${app.email}`,
+    `- **Pronouns:** ${app.pronouns || '\u2014'}`,
+    `- **Location:** ${app.location || '\u2014'}`,
+    `- **Portfolio:** ${app.portfolio}`,
+    app.portfolio2 ? `- **Portfolio 2:** ${app.portfolio2}` : null,
+    `- **Hours/week:** ${app.hours || '\u2014'}`,
+    `- **Runway:** ${app.runway || '\u2014'}`,
+    `- **Source:** ${app.source || '\u2014'}`,
+    `- **Status:** ${app.status || 'new'}`,
+    `- **Submitted:** ${formatDate(app.submitted_at)}`,
+    '',
+    '## Endurance Test',
+    '',
+    `### Why this?`,
+    app.why_this || '\u2014',
+    '',
+    `### What have you built that nobody asked you to build?`,
+    app.built_unpaid || '\u2014',
+    '',
+    `### Endurance story`,
+    app.endurance_story || '\u2014',
+    '',
+    `### AI relationship`,
+    app.ai_relationship || '\u2014',
+  ];
+
+  if (Object.keys(roleAnswers).length > 0) {
+    lines.push('', '## Role-Specific Answers', '');
+    for (const [key, val] of Object.entries(roleAnswers)) {
+      lines.push(`### ${key}`, val, '');
+    }
+  }
+
+  if (app.anything_else) {
+    lines.push('', '## Anything Else', '', app.anything_else);
+  }
+
+  return lines.filter(l => l !== null).join('\n');
+}
+
+function downloadMarkdown(app) {
+  const md = applicationToMarkdown(app);
+  const blob = new Blob([md], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${app.name.replace(/\s+/g, '-').toLowerCase()}-${app.role}.md`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 /* ── Application Card ── */
 
 function ApplicationCard({ app, expanded, onToggle, onStatusChange }) {
@@ -139,6 +198,15 @@ function ApplicationCard({ app, expanded, onToggle, onStatusChange }) {
               <p>{app.anything_else}</p>
             </div>
           )}
+          <div className="zv-admin-card-actions">
+            <button
+              type="button"
+              className="zv-admin-download-btn"
+              onClick={() => downloadMarkdown(app)}
+            >
+              Download as .md
+            </button>
+          </div>
         </div>
       )}
     </div>
