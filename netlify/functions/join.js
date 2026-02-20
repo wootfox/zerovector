@@ -4,24 +4,10 @@ const supabase = process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_K
   ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
   : null;
 
-// Rate limit: 3 submissions per IP per hour
-const rateMap = new Map();
-const RATE_LIMIT = 3;
-const RATE_WINDOW = 60 * 60 * 1000;
-
-function checkRate(ip) {
-  const now = Date.now();
-  const entry = rateMap.get(ip);
-  if (!entry || now - entry.start > RATE_WINDOW) {
-    rateMap.set(ip, { start: now, count: 1 });
-    return true;
-  }
-  entry.count++;
-  return entry.count <= RATE_LIMIT;
-}
-
 const VALID_ROLES = ['framework', 'curriculum', 'evangelist', 'funding'];
-const COMMON_REQUIRED = ['name', 'pronouns', 'email', 'location', 'portfolio', 'portfolio2', 'why_this', 'built_unpaid', 'endurance_story', 'ai_relationship', 'hours', 'runway', 'anything_else', 'source'];
+
+// name and email come from the verified JWT — not from the form
+const COMMON_REQUIRED = ['pronouns', 'location', 'portfolio', 'portfolio2', 'why_this', 'built_unpaid', 'endurance_story', 'ai_relationship', 'hours', 'runway', 'anything_else', 'source'];
 
 const ROLE_REQUIRED = {
   framework: ['fw_stack', 'fw_oss', 'fw_investiture', 'fw_dx'],
@@ -37,30 +23,37 @@ const ROLE_FIELDS = {
   funding: ['fund_experience', 'fund_sources', 'fund_scenario', 'fund_philosophy'],
 };
 
-function hashIP(ip) {
-  let hash = 0;
-  for (let i = 0; i < ip.length; i++) {
-    const char = ip.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash |= 0;
-  }
-  return hash.toString(36);
+function json(body, status = 200) {
+  return new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
 }
 
 export default async (req) => {
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return json({ error: 'Method not allowed' }, 405);
   }
 
-  const ip = req.headers.get('x-forwarded-for') || req.headers.get('client-ip') || 'unknown';
-  if (!checkRate(ip)) {
-    return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
-      status: 429,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (!supabase) {
+    return json({ error: 'Server not configured' }, 500);
+  }
+
+  // Verify JWT — Google auth required
+  const authHeader = req.headers.get('authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return json({ error: 'Authentication required. Please sign in with Google.' }, 401);
+  }
+
+  const token = authHeader.slice(7);
+  const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+  if (authError || !user) {
+    return json({ error: 'Invalid or expired session. Please sign in again.' }, 401);
+  }
+
+  // Pull name and email from verified Google identity
+  const name = user.user_metadata?.full_name || user.user_metadata?.name || '';
+  const email = user.email || '';
+
+  if (!name || !email) {
+    return json({ error: 'Could not verify your identity. Please sign in again.' }, 401);
   }
 
   try {
@@ -68,10 +61,7 @@ export default async (req) => {
 
     // Validate role
     if (!body.role || !VALID_ROLES.includes(body.role)) {
-      return new Response(JSON.stringify({ error: 'Please select a role.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return json({ error: 'Please select a role.' }, 400);
     }
 
     // Validate common required fields
@@ -86,19 +76,7 @@ export default async (req) => {
     }
 
     if (missing.length > 0) {
-      return new Response(JSON.stringify({ error: 'Missing required fields.', missing }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Basic email validation
-    const email = String(body.email).trim();
-    if (!email.includes('@') || !email.includes('.')) {
-      return new Response(JSON.stringify({ error: 'Please provide a valid email address.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return json({ error: 'Missing required fields.', missing }, 400);
     }
 
     // Extract role-specific answers into JSONB
@@ -109,9 +87,10 @@ export default async (req) => {
 
     const row = {
       role: body.role,
-      name: String(body.name).trim(),
+      user_id: user.id,
+      name: name.trim(),
+      email: email.trim(),
       pronouns: String(body.pronouns).trim(),
-      email,
       location: String(body.location).trim(),
       portfolio: String(body.portfolio).trim(),
       portfolio2: String(body.portfolio2).trim(),
@@ -124,33 +103,18 @@ export default async (req) => {
       role_answers: roleAnswers,
       anything_else: String(body.anything_else).trim(),
       source: body.source,
-      ip_hash: hashIP(ip),
       submitted_at: new Date().toISOString(),
     };
 
-    // If Supabase is configured, insert. Otherwise log (for local dev).
-    if (supabase) {
-      const { error } = await supabase.from('join_applications').insert(row);
-      if (error) {
-        console.error('Supabase insert error:', error);
-        return new Response(JSON.stringify({ error: 'Submission failed. Please try again.' }), {
-          status: 500,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      }
-    } else {
-      console.log('Join application (no Supabase):', JSON.stringify(row, null, 2));
+    const { error } = await supabase.from('join_applications').insert(row);
+    if (error) {
+      console.error('Supabase insert error:', error);
+      return json({ error: 'Submission failed. Please try again.' }, 500);
     }
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return json({ success: true });
   } catch (err) {
     console.error('Join function error:', err);
-    return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return json({ error: 'Something went wrong. Please try again.' }, 500);
   }
 };

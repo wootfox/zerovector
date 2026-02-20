@@ -6,6 +6,8 @@ import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
 import Animate from '../components/Animate';
 import useSEO from '../hooks/useSEO';
+import { useUser } from '../contexts/UserContext';
+import { supabase } from '../lib/supabase';
 import en from '../content/en';
 
 const { join } = en;
@@ -151,6 +153,7 @@ function FormSection({ section, formData, onChange, errors }) {
 /* ── Main Page ── */
 
 function JoinPage() {
+  const { user, isLoggedIn, loading: authLoading, signIn } = useUser();
   const [selectedRole, setSelectedRole] = useState(null);
   const [formData, setFormData] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -226,9 +229,17 @@ function JoinPage() {
 
     setSubmitting(true);
     try {
+      const headers = { 'Content-Type': 'application/json' };
+
+      // Attach JWT for server-side identity verification
+      if (supabase) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) headers.Authorization = `Bearer ${session.access_token}`;
+      }
+
       const res = await fetch('/.netlify/functions/join', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ role: selectedRole, ...formData }),
       });
 
@@ -370,8 +381,41 @@ function JoinPage() {
         </div>
       </section>
 
-      {/* Application Form */}
+      {/* Auth gate */}
+      {!authLoading && !isLoggedIn && (
+        <section className="zv-section">
+          <div className="zv-container">
+            <Animate>
+              <div className="zv-join-auth-gate">
+                <h2 className="zv-join-form-title">{join.authPrompt.heading}</h2>
+                <p className="zv-join-auth-gate-text">{join.authPrompt.text}</p>
+                <button type="button" className="zv-join-submit-btn" onClick={signIn}>
+                  {join.authPrompt.buttonText}
+                </button>
+              </div>
+            </Animate>
+          </div>
+        </section>
+      )}
+
+      {/* Application Form — only when signed in */}
+      {isLoggedIn && (
       <form onSubmit={handleSubmit} noValidate>
+
+        {/* Identity bar */}
+        <section className="zv-section">
+          <div className="zv-container">
+            <Animate>
+              <div className="zv-join-identity">
+                {user.avatar && <img src={user.avatar} alt="" className="zv-join-identity-avatar" referrerPolicy="no-referrer" />}
+                <div>
+                  <div className="zv-join-identity-name">Applying as <strong>{user.name}</strong></div>
+                  <div className="zv-join-identity-email">{user.email}</div>
+                </div>
+              </div>
+            </Animate>
+          </div>
+        </section>
 
         {/* Who You Are */}
         <section className="zv-section">
@@ -428,6 +472,7 @@ function JoinPage() {
           </div>
         </section>
       </form>
+      )}
 
       {/* Epigraph */}
       <section className="zv-section">

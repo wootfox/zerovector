@@ -3054,6 +3054,52 @@ a:hover {
   opacity: 0.4;
 }
 
+/* Auth gate */
+.zv-join-auth-gate {
+  text-align: center;
+  padding: 48px 24px;
+  border: 1px solid var(--void-border);
+  border-radius: 8px;
+  background: var(--void-surface);
+}
+
+.zv-join-auth-gate-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 12px auto 28px;
+  max-width: 480px;
+}
+
+/* Identity bar */
+.zv-join-identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--void-border);
+  border-radius: 8px;
+  background: var(--void-surface);
+}
+
+.zv-join-identity-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--void-border);
+}
+
+.zv-join-identity-name {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.zv-join-identity-email {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
 /* Join page responsive */
 @media (max-width: 600px) {
   .zv-join-role-cards {

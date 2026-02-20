@@ -91,13 +91,17 @@ const join = {
     },
   ],
 
+  authPrompt: {
+    heading: 'Ready to apply?',
+    text: 'Sign in with Google to begin your application. Your name and email will be pulled from your Google account \u2014 no anonymous submissions.',
+    buttonText: 'Sign in with Google',
+  },
+
   whoYouAre: {
     title: 'Who you are',
     subtitle: 'The basics.',
     fields: [
-      { name: 'name', label: 'Name', type: 'text', required: true, inline: 'left' },
-      { name: 'pronouns', label: 'Pronouns', type: 'text', required: true, placeholder: 'e.g. she/her, they/them', inline: 'right' },
-      { name: 'email', label: 'Email', type: 'email', required: true, inline: 'left' },
+      { name: 'pronouns', label: 'Pronouns', type: 'text', required: true, placeholder: 'e.g. she/her, they/them', inline: 'left' },
       { name: 'location', label: 'Location', type: 'text', required: true, hintBelow: 'City, country. Remote is fine. Time zone matters.', inline: 'right' },
       { name: 'portfolio', label: 'Link to your work', type: 'url', required: true, hint: 'Portfolio, GitHub, LinkedIn, personal site, published writing. Whatever shows us who you are.' },
       { name: 'portfolio2', label: 'Second link', type: 'url', required: true },
