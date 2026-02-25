@@ -40,9 +40,9 @@ const origin = {
   },
 
   photos: [
-    { id: 'headshot', alt: 'Erika Flowers', placeholder: true },
-    { id: 'speaking', alt: 'Speaking at NN/g', placeholder: true },
-    { id: 'building', alt: 'Building with AI agents', placeholder: true },
+    { id: 'headshot', alt: 'Erika Flowers', src: '/images/origin-headshot.png' },
+    { id: 'speaking', alt: 'Speaking at NN/g', src: '/images/origin-speaking.png' },
+    { id: 'building', alt: 'Building with AI agents', src: '/images/origin-building.png' },
   ],
 
   credentials: [

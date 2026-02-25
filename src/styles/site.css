@@ -4166,7 +4166,7 @@ a:hover {
 }
 
 /* ============================================
-   Origin Page — Photo Placeholders
+   Origin Page — Photos
    ============================================ */
 
 .zv-origin-photos {
@@ -4175,25 +4175,26 @@ a:hover {
   gap: 16px;
 }
 
-.zv-origin-photo-placeholder {
-  aspect-ratio: 4/3;
-  background: var(--void-elevated);
-  border: 1px solid var(--void-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.zv-origin-photo {
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--void-border);
 }
 
-.zv-origin-photo-placeholder::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.03) 0%, transparent 50%);
+.zv-origin-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
 }
 
 .zv-origin-photo-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.1em;

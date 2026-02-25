@@ -44,7 +44,8 @@ function OriginPage() {
           <Animate>
             <div className="zv-origin-photos">
               {origin.photos.map((photo) => (
-                <div key={photo.id} className="zv-origin-photo-placeholder">
+                <div key={photo.id} className="zv-origin-photo">
+                  <img src={photo.src} alt={photo.alt} />
                   <span className="zv-origin-photo-label">{photo.alt}</span>
                 </div>
               ))}
