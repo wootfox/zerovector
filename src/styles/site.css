@@ -6550,6 +6550,141 @@ a:hover {
   margin: 0 auto;
 }
 
+/* --- Section Headlines & Body (What It Is, Connection) --- */
+
+.inv-section-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #c9a84c 0%, #e8d89c 50%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 24px;
+}
+
+.inv-section-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  color: #8a9ab5;
+  line-height: 1.8;
+  max-width: 780px;
+  margin: 0;
+}
+
+/* --- File Tree (What You Get) --- */
+
+.inv-filetree-wrapper {
+  max-width: 720px;
+  background: #080e1a;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.inv-filetree {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #e8d89c;
+  padding: 24px;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* --- Reading Order (What You Get) --- */
+
+.inv-reading-order {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.inv-reading-step {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  background: rgba(10, 22, 40, 0.8);
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  padding: 28px 32px;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.inv-reading-step:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: inset 4px 0 30px -12px rgba(201, 168, 76, 0.12);
+}
+
+.inv-reading-step + .inv-reading-step {
+  border-top: none;
+}
+
+.inv-reading-step-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: #c9a84c;
+  opacity: 0.25;
+  flex-shrink: 0;
+  width: 64px;
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(201, 168, 76, 0.1);
+  transition: opacity 0.3s var(--ease-out), text-shadow 0.3s var(--ease-out);
+}
+
+.inv-reading-step:hover .inv-reading-step-number {
+  opacity: 0.5;
+  text-shadow: 0 0 40px rgba(201, 168, 76, 0.25);
+}
+
+.inv-reading-step-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.inv-reading-step-file {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #c9a84c;
+  margin: 0 0 6px;
+  letter-spacing: 0.02em;
+}
+
+.inv-reading-step-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #8a9ab5;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.inv-reading-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(201, 168, 76, 0.5);
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* --- Roadmap Version Badge --- */
+
+.inv-roadmap-version {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #c9a84c;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 3px 10px;
+  margin-bottom: 14px;
+}
+
 /* --- Terminal --- */
 
 .inv-terminal {
@@ -6880,6 +7015,23 @@ a:hover {
     font-size: 12px;
   }
 
+  .inv-filetree {
+    font-size: 11px;
+    line-height: 1.7;
+    padding: 16px;
+  }
+
+  .inv-reading-step {
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 20px;
+  }
+
+  .inv-reading-step-number {
+    width: auto;
+    font-size: 1.75rem;
+  }
+
   .inv-cta-buttons {
     flex-direction: column;
     align-items: center;
@@ -6918,6 +7070,15 @@ a:hover {
   .inv-terminal-line {
     font-size: 11px;
     gap: 8px;
+  }
+
+  .inv-filetree {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .inv-reading-step {
+    padding: 20px 16px;
   }
 }
 

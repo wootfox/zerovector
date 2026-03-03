@@ -16,7 +16,7 @@ function InvestiturePage() {
 
   useSEO({
     title: 'Investiture',
-    description: 'A decoupled, enterprise-ready application scaffold for AI-assisted development. Clone it, open Claude Code, start building. Architecture that teaches your AI to write clean code.',
+    description: 'The AI-native project scaffold. Start every project with VECTOR.md doctrine, structured research schemas, and clean architecture. Clone it, open Claude Code, start building.',
     path: '/investiture',
     ogImage: 'https://zerovector.design/og/investiture.png',
   });
@@ -66,115 +66,69 @@ function InvestiturePage() {
         </div>
       </section>
 
-      {/* CTA — Start Building (inverted) */}
-      <section className="inv-section" style={{ paddingTop: 0 }}>
+      {/* What It Is */}
+      <section className="inv-section">
         <div className="inv-container">
+          <hr className="inv-rule" />
           <Animate>
-            <div className="inv-cta-inverted">
-              <h2 className="inv-cta-inverted-title">{inv.cta.title}</h2>
-              <p className="inv-cta-inverted-body">{inv.cta.body}</p>
-              <div className="inv-cta-inverted-buttons">
-                <a href={inv.cta.primaryUrl} target="_blank" rel="noopener noreferrer" className="inv-btn inv-btn--dark">{inv.cta.primaryCta}</a>
-                <a href={inv.cta.secondaryUrl} target="_blank" rel="noopener noreferrer" className="inv-btn inv-btn--dark-outline">{inv.cta.secondaryCta}</a>
-              </div>
+            <div className="inv-label">{inv.whatItIs.label}</div>
+            <h2 className="inv-section-headline">{inv.whatItIs.headline}</h2>
+            <p className="inv-section-body">{inv.whatItIs.body}</p>
+          </Animate>
+          <Animate delay={1}>
+            <div className="inv-card inv-card--steel" style={{ marginTop: 32 }}>
+              <h3 className="inv-card-title">{inv.whatItIs.callout.title}</h3>
+              <p className="inv-card-body">{inv.whatItIs.callout.body}</p>
             </div>
           </Animate>
         </div>
       </section>
 
-      {/* Ethos: What Is / Is Not */}
-      <section className="inv-section">
-        <div className="inv-container">
-          <hr className="inv-rule" />
-          <Animate>
-            <div className="inv-label">{inv.ethos.label}</div>
-          </Animate>
-          <div className="inv-two-col">
-            <Animate>
-              <div className="inv-card inv-card--gold">
-                <h3 className="inv-card-title">{inv.ethos.whatIs.title}</h3>
-                <p className="inv-card-body">{inv.ethos.whatIs.body}</p>
-              </div>
-            </Animate>
-            <Animate delay={1}>
-              <div className="inv-card inv-card--gold">
-                <h3 className="inv-card-title">{inv.ethos.whatIsNot.title}</h3>
-                <p className="inv-card-body">{inv.ethos.whatIsNot.body}</p>
-              </div>
-            </Animate>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem / Solution */}
-      <section className="inv-section">
-        <div className="inv-container">
-          <hr className="inv-rule" />
-          <Animate>
-            <div className="inv-label">{inv.problem.label}</div>
-          </Animate>
-          <div className="inv-two-col">
-            <Animate>
-              <div className="inv-card inv-card--steel">
-                <h3 className="inv-card-title">{inv.problem.problem.title}</h3>
-                <p className="inv-card-body">{inv.problem.problem.body}</p>
-              </div>
-            </Animate>
-            <Animate delay={1}>
-              <div className="inv-card inv-card--gold">
-                <h3 className="inv-card-title">{inv.problem.solution.title}</h3>
-                <p className="inv-card-body">{inv.problem.solution.body}</p>
-              </div>
-            </Animate>
-          </div>
-        </div>
-      </section>
-
-      {/* Architecture Layers */}
+      {/* What You Get — file tree + reading order */}
       <section className="inv-section inv-section--blueprint">
         <div className="inv-container">
           <hr className="inv-rule" />
           <Animate>
-            <div className="inv-label">{inv.architecture.label}</div>
-            <p className="inv-intro">{inv.architecture.intro}</p>
+            <div className="inv-label">{inv.whatYouGet.label}</div>
+            <p className="inv-intro">{inv.whatYouGet.intro}</p>
           </Animate>
-          <div className="inv-layers">
-            {inv.architecture.layers.map((layer, i) => (
-              <Animate key={i}>
-                <div className="inv-layer">
-                  <div className="inv-layer-number">{layer.number}</div>
-                  <div className="inv-layer-content">
-                    <h3 className="inv-layer-title">{layer.title}</h3>
-                    <div className="inv-layer-path">./{layer.path}{layer.file}</div>
-                    <p className="inv-layer-desc">{layer.desc}</p>
+          <Animate delay={1}>
+            <div className="inv-filetree-wrapper">
+              <div className="inv-terminal-bar">
+                <div className="inv-terminal-dots" aria-hidden="true">
+                  <span /><span /><span />
+                </div>
+                <span className="inv-terminal-title">project structure</span>
+              </div>
+              <pre className="inv-filetree">{inv.whatYouGet.fileTree}</pre>
+            </div>
+          </Animate>
+          <Animate delay={2}>
+            <div className="inv-reading-order">
+              {inv.whatYouGet.readingOrder.map((item, i) => (
+                <div key={i} className="inv-reading-step">
+                  <div className="inv-reading-step-number">{item.step}</div>
+                  <div className="inv-reading-step-content">
+                    <h3 className="inv-reading-step-file">{item.file}</h3>
+                    <p className="inv-reading-step-desc">{item.desc}</p>
                   </div>
                 </div>
-                {i < inv.architecture.layers.length - 1 && (
-                  <div className="inv-layer-connector" />
-                )}
-              </Animate>
-            ))}
-          </div>
+              ))}
+            </div>
+            <p className="inv-reading-caption">{inv.whatYouGet.readingOrderCaption}</p>
+          </Animate>
         </div>
       </section>
 
-      {/* Who It's For */}
+      {/* The Zero Vector Connection */}
       <section className="inv-section">
         <div className="inv-container">
           <hr className="inv-rule" />
           <Animate>
-            <div className="inv-label">{inv.audience.label}</div>
+            <div className="inv-label">{inv.connection.label}</div>
+            <h2 className="inv-section-headline">{inv.connection.headline}</h2>
+            <p className="inv-section-body">{inv.connection.body}</p>
           </Animate>
-          <div className="inv-three-col">
-            {inv.audience.groups.map((group, i) => (
-              <Animate key={i} delay={i}>
-                <div className="inv-card inv-card--gold">
-                  <h3 className="inv-card-title">{group.title}</h3>
-                  <p className="inv-card-body">{group.body}</p>
-                </div>
-              </Animate>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -214,6 +168,27 @@ function InvestiturePage() {
         </div>
       </section>
 
+      {/* What's Coming — Roadmap */}
+      <section className="inv-section">
+        <div className="inv-container">
+          <hr className="inv-rule" />
+          <Animate>
+            <div className="inv-label">{inv.roadmap.label}</div>
+          </Animate>
+          <div className="inv-two-col">
+            {inv.roadmap.versions.map((ver, i) => (
+              <Animate key={i} delay={i}>
+                <div className="inv-card inv-card--gold">
+                  <div className="inv-roadmap-version">{ver.version}</div>
+                  <h3 className="inv-card-title">{ver.title}</h3>
+                  <p className="inv-card-body">{ver.body}</p>
+                </div>
+              </Animate>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Quote */}
       <section className="inv-section inv-quote-section">
         <div className="inv-container">
@@ -228,30 +203,6 @@ function InvestiturePage() {
         </div>
       </section>
 
-      {/* Learn More */}
-      <section className="inv-section">
-        <div className="inv-container">
-          <hr className="inv-rule" />
-          <Animate>
-            <div className="inv-label">Learn More</div>
-          </Animate>
-          <div className="inv-two-col">
-            <Animate>
-              <Link to="/open/learn" className="inv-card inv-card--gold inv-card--linked">
-                <h3 className="inv-card-title">The Open Vector</h3>
-                <p className="inv-card-body">Free curriculum. From orientation to auteur. Learn the philosophy behind the scaffold.</p>
-              </Link>
-            </Animate>
-            <Animate delay={1}>
-              <Link to="/philosophy" className="inv-card inv-card--gold inv-card--linked">
-                <h3 className="inv-card-title">The Philosophy</h3>
-                <p className="inv-card-body">Seven principles for building with AI. The thinking that shapes the scaffold.</p>
-              </Link>
-            </Animate>
-          </div>
-        </div>
-      </section>
-
       {/* Bottom CTA */}
       <section className="inv-section inv-cta-section">
         <div className="inv-container">
@@ -260,7 +211,6 @@ function InvestiturePage() {
             <div className="inv-cta-buttons">
               <a href={inv.cta.primaryUrl} target="_blank" rel="noopener noreferrer" className="inv-btn inv-btn--primary">{inv.cta.primaryCta}</a>
               <a href={inv.cta.secondaryUrl} target="_blank" rel="noopener noreferrer" className="inv-btn inv-btn--outline">{inv.cta.secondaryCta}</a>
-              <Link to="/" className="inv-btn inv-btn--outline">{inv.cta.backCta}</Link>
             </div>
           </Animate>
         </div>
