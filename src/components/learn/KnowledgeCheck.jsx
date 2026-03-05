@@ -24,21 +24,21 @@ function KnowledgeCheck({ questions }) {
               <div className="ovl-knowledge-check-q">
                 <span className="ovl-knowledge-check-num">{i + 1}.</span>
                 {q.question}
+                {q.hint && (
+                  <div className="ovl-knowledge-check-hint-wrap">
+                    {revealed[i] ? (
+                      <div className="ovl-knowledge-check-hint">{q.hint}</div>
+                    ) : (
+                      <button
+                        className="ovl-knowledge-check-hint-btn"
+                        onClick={() => setRevealed(prev => ({ ...prev, [i]: true }))}
+                      >
+                        Show hint
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
-              {q.hint && (
-                <div className="ovl-knowledge-check-hint-wrap">
-                  {revealed[i] ? (
-                    <div className="ovl-knowledge-check-hint">{q.hint}</div>
-                  ) : (
-                    <button
-                      className="ovl-knowledge-check-hint-btn"
-                      onClick={() => setRevealed(prev => ({ ...prev, [i]: true }))}
-                    >
-                      Show hint
-                    </button>
-                  )}
-                </div>
-              )}
             </div>
           ))}
         </div>
