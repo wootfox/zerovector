@@ -17,6 +17,8 @@ import NamePage from './pages/NamePage';
 import EnterprisePage from './pages/EnterprisePage';
 import JoinPage from './pages/JoinPage';
 import LearnEnterprisePage from './pages/learn/LearnEnterprisePage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import LearnHubPage from './pages/learn/LearnHubPage';
 import LearnIndexPage from './pages/learn/LearnIndexPage';
@@ -52,6 +54,8 @@ function App() {
         {/* Redirects from old routes */}
         <Route path="/about" element={<Navigate to="/philosophy" replace />} />
         <Route path="/join" element={<JoinPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
         <Route path="/pipeline" element={<Navigate to="/approach" replace />} />
         <Route path="/reading" element={<Navigate to="/media" replace />} />
         <Route path="/resources" element={<Navigate to="/media" replace />} />

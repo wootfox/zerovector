@@ -14,6 +14,8 @@ function Footer() {
             <a href="https://eflowers.substack.com" target="_blank" rel="noopener noreferrer">Substack</a>
             <a href="https://www.linkedin.com/in/helloeflowers/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://helloerikaflowers.com" target="_blank" rel="noopener noreferrer">helloerikaflowers.com</a>
+            <Link to="/privacy">Privacy</Link>
+            <Link to="/terms">Terms</Link>
           </div>
         </div>
       </div>
