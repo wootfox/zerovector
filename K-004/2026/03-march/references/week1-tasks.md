@@ -4,17 +4,17 @@
 **Sprint:** Zero Vector March Sprint
 **Dates:** Mar 2–7
 **Pillar:** Investiture — Non-Developer Practitioner Stress Test
-**Status:** Todo
+**Status:** Complete
 **Assignee:** wootfox
 
 ---
 
 ## Core Tasks
 
-- [ ] Read the Investiture documentation and Zero Vector methodology overview — take notes on anything confusing, unexplained, or assumed
-- [ ] Attempt to create a vector.md file from scratch for a real project you know well as a facilitator
-- [ ] Rule: do not ask for help during this attempt — note every moment you get stuck, every question you have, every assumption you have to make
-- [ ] Write a raw friction journal of the experience: what was intuitive, what was opaque, what felt wrong, what you gave up on
+- [x] Read the Investiture documentation and Zero Vector methodology overview — take notes on anything confusing, unexplained, or assumed
+- [x] Attempt to create a vector.md file from scratch for a real project you know well as a facilitator
+- [x] Rule: do not ask for help during this attempt — note every moment you get stuck, every question you have, every assumption you have to make
+- [x] Write a raw friction journal of the experience: what was intuitive, what was opaque, what felt wrong, what you gave up on
 
 ## Stretch
 
