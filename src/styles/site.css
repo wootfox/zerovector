@@ -13730,77 +13730,109 @@ a:hover {
   padding: 28px 0 50px;
 }
 
-/* Frosted glass hero card */
-.arr-hero-card {
-  background: rgba(75, 50, 56, 0.71);
-  backdrop-filter: blur(24px) saturate(1.2);
-  -webkit-backdrop-filter: blur(24px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 16px;
-  padding: 24px 36px 28px;
-  width: 100%;
-  text-align: center;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transition: background-color 1.5s ease, border-color 1.2s ease, box-shadow 1.2s ease;
+/* Gradient overlay for text readability over scene */
+.arr-hero-sky-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 75%,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.18) 50%,
+    transparent 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
 }
 
-.arr-hero .arr-label {
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 6px;
+/* Hero tag — minimal pill */
+.arr-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  padding: 5px 16px;
+  margin-bottom: 20px;
+}
+
+.arr-hero-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2E8B7A;
+  flex-shrink: 0;
 }
 
 .arr-hero-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(28px, 4.5vw, 44px);
+  font-size: clamp(36px, 6vw, 64px);
   font-weight: 700;
-  line-height: 1.1;
-  margin: 0 0 12px;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0 0 16px;
   color: #FFFFFF;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 .arr-hero-accent {
-  color: #F3C677;
+  background: linear-gradient(135deg, #F3C677 0%, #E88D67 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .arr-hero-subtitle {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.88);
-  line-height: 1.65;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
   max-width: 480px;
-  margin: 0 auto 20px;
+  margin: 0 auto 28px;
   font-family: 'Inter', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
 }
 
 .arr-hero-price {
   color: #F3C677;
   font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
 }
 
 .arr-hero-ctas {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.arr-hero-ctas .arr-btn {
-  padding: 10px 22px;
-  font-size: 11px;
+.arr-hero-ctas .arr-btn--primary {
+  padding: 12px 28px;
+  font-size: 12px;
+  border-radius: 100px;
+}
+
+.arr-hero-ctas .arr-btn--outline {
+  padding: 12px 28px;
+  font-size: 12px;
+  border-radius: 100px;
 }
 
 /* Hero button overrides */
 .arr-hero .arr-btn--outline {
-  color: #FFFFFF;
-  border-color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .arr-hero .arr-btn--outline:hover {
-  border-color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* --- Terminal --- */
@@ -15134,14 +15166,15 @@ a:hover {
   opacity: 0.18;
 }
 
-/* --- Hero Card (Night) --- */
+/* --- Hero Overlay (Night — sky is already dark, lighten the vignette) --- */
 
-.arr-page--night .arr-hero-card {
-  background: rgba(8, 12, 40, 0.40);
-  border-color: rgba(180, 200, 255, 0.10);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(180, 200, 255, 0.08);
+.arr-page--night .arr-hero-sky-overlay {
+  opacity: 0.3;
+}
+
+.arr-page--night .arr-hero-tag {
+  border-color: rgba(180, 200, 255, 0.12);
+  color: rgba(200, 215, 255, 0.6);
 }
 
 /* --- Terminal — Deeper Shadows --- */
@@ -15403,10 +15436,14 @@ a:hover {
     --horizon: 420px;
   }
   .arr-hero-title {
-    font-size: clamp(24px, 7vw, 34px);
+    font-size: clamp(28px, 8vw, 40px);
   }
   .arr-hero-subtitle {
-    font-size: 15px;
+    font-size: 14px;
+  }
+  .arr-hero-tag {
+    font-size: 9px;
+    padding: 4px 12px;
   }
 
   /* Simplify scene on mobile */

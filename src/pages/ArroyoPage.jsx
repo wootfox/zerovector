@@ -97,28 +97,33 @@ function ArroyoPage() {
         </div>
         {/* Sky zone — above the horizon */}
         <div className="arr-hero-sky">
+          <div className="arr-hero-sky-overlay" />
           <div className="arr-container">
             <Animate>
-              <div className="arr-hero-card">
-                <div className="arr-label">{arr.hero.label}</div>
-                <h1 className="arr-hero-title">
-                  {arr.hero.titleLines[0]}<br />
-                  <span className="arr-hero-accent">{arr.hero.titleLines[1]}</span><br />
-                  {arr.hero.titleLines[2]}
-                </h1>
-                <p className="arr-hero-subtitle">
-                  {arr.hero.subtitle}{' '}
-                  <span className="arr-hero-price">{arr.hero.price}</span>{' '}
-                  {arr.hero.subtitleEnd}
-                </p>
-                <div className="arr-hero-ctas">
-                  <a href={arr.cta.bookingUrl} target="_blank" rel="noopener noreferrer" className="arr-btn arr-btn--primary">
-                    {arr.hero.primaryCta} &rarr;
-                  </a>
-                  <Link to="/investiture" className="arr-btn arr-btn--outline">
-                    {arr.hero.secondaryCta}
-                  </Link>
-                </div>
+              <div className="arr-hero-tag">{arr.hero.label}</div>
+            </Animate>
+            <Animate>
+              <h1 className="arr-hero-title">
+                {arr.hero.titleLines[0]}<br />
+                <span className="arr-hero-accent">{arr.hero.titleLines[1]}</span><br />
+                {arr.hero.titleLines[2]}
+              </h1>
+            </Animate>
+            <Animate>
+              <p className="arr-hero-subtitle">
+                {arr.hero.subtitle}{' '}
+                <span className="arr-hero-price">{arr.hero.price}</span>{' '}
+                {arr.hero.subtitleEnd}
+              </p>
+            </Animate>
+            <Animate>
+              <div className="arr-hero-ctas">
+                <a href={arr.cta.bookingUrl} target="_blank" rel="noopener noreferrer" className="arr-btn arr-btn--primary">
+                  {arr.hero.primaryCta} &rarr;
+                </a>
+                <Link to="/investiture" className="arr-btn arr-btn--outline">
+                  {arr.hero.secondaryCta}
+                </Link>
               </div>
             </Animate>
           </div>
