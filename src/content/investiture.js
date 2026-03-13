@@ -6,6 +6,7 @@ const investiture = {
     brand: 'Investiture',
     back: 'Zero Vector',
     github: 'GitHub',
+    changelog: 'Changelog',
   },
 
   hero: {
@@ -27,28 +28,31 @@ const investiture = {
   },
 
   skills: {
-    label: 'Skills',
+    label: 'The Skill Chain',
     headline: 'Doctrine that enforces itself.',
-    body: 'Most scaffolds give you files. Investiture gives you files that fight back. Skills are declared in invest.md \u2014 each one reads your doctrine and holds your project to the standard you set for it.',
-    manifest: `# invest.md\nskills:\n  - alignment\n  - architecture\n  - provenance\n  - onboarding`,
-    items: [
+    body: 'Most scaffolds give you files and hope for the best. Investiture gives you files and skills that audit them. Each skill reads your doctrine at runtime \u2014 your rules, your conventions, your architecture \u2014 and holds your project to the standard you declared.',
+    chain: [
       {
-        name: 'Alignment',
-        desc: 'Every feature traced to a user need defined in VECTOR.md. If it doesn\u2019t serve someone you\u2019ve identified, the Skill asks why.',
+        name: '/invest-backfill',
+        role: 'Bootstrap',
+        desc: 'Surveys an existing codebase \u2014 README, package.json, git history, file tree \u2014 and generates VECTOR.md, CLAUDE.md, and ARCHITECTURE.md with inferred content and operator prompts for the parts only you can fill in.',
+        when: 'Once, on existing projects that don\u2019t have doctrine yet.',
       },
       {
-        name: 'Architecture',
-        desc: 'File structure, layer boundaries, naming conventions \u2014 enforced from ARCHITECTURE.md. Not guidelines. Constraints.',
+        name: '/invest-doctrine',
+        role: 'Validate',
+        desc: 'Audits the doctrine files themselves for completeness, internal consistency, cross-document contradictions, and drift from the actual codebase on disk.',
+        when: 'Before invest-architecture. After editing any doctrine file.',
       },
       {
-        name: 'Provenance',
-        desc: 'Design decisions linked to research artifacts in /vector. Build on evidence, not intuition.',
-      },
-      {
-        name: 'Onboarding',
-        desc: 'New agents and teammates read the doctrine stack before they contribute. The reading order is the first oath.',
+        name: '/invest-architecture',
+        role: 'Enforce',
+        desc: 'Reads your ARCHITECTURE.md at runtime and checks every source file against what you declared. Layers, naming, imports, tokens, state management, file size.',
+        when: 'Before shipping. After refactoring. As a structural quality gate.',
       },
     ],
+    flow: '/invest-backfill  \u2192  /invest-doctrine  \u2192  /invest-architecture',
+    flowCaption: 'Backfill creates the doctrine. Doctrine validates it. Architecture enforces it.',
   },
 
   whatYouGet: {
@@ -98,13 +102,73 @@ const investiture = {
     versions: [
       {
         version: 'v1.3',
-        title: 'Skills',
-        body: 'Doctrine that enforces itself. Declare Skills in invest.md and your project holds itself to the standard you set. Alignment, architecture, provenance, onboarding \u2014 active from the first commit.',
+        title: 'Skill Chain',
+        body: 'Three skills \u2014 backfill, doctrine, architecture \u2014 that read your project doctrine at runtime and enforce it. Copy the skills into any repo.',
+        shipped: true,
       },
       {
         version: 'v2.0',
         title: 'Seeded Init',
         body: 'Tell Investiture what you are building and who it is for. Choose your stack, activate the right Skills, and seed your research with first hypotheses \u2014 all from a single command.',
+      },
+    ],
+  },
+
+  changelog: {
+    title: 'Changelog',
+    subtitle: 'What shipped, when.',
+    versions: [
+      {
+        version: 'v1.3',
+        date: 'Mar 11, 2026',
+        title: 'Skill Chain MVP',
+        items: [
+          'Three executable skills: /invest-backfill, /invest-doctrine, /invest-architecture',
+          'Backfill surveys existing codebases and generates starter doctrine',
+          'Doctrine audit checks completeness, consistency, contradictions, and disk drift',
+          'Architecture audit checks layers, imports, naming, tokens, state, file size',
+          'CLAUDE.md reframed as contributor onboarding (not agent persona)',
+          'Development Principles section added to ARCHITECTURE.md template',
+          '/vector/audits/ directory for persistent audit reports',
+        ],
+      },
+      {
+        version: 'v1.2',
+        date: 'Mar 4, 2026',
+        title: 'Doctrine System + Zero Vector Integration',
+        items: [
+          'VECTOR.md, CLAUDE.md, ARCHITECTURE.md doctrine templates',
+          '/vector directory with six research schemas (persona, JTBD, assumption, interview, competitive, blue ocean)',
+          'ADR template at /vector/decisions/',
+          'start.sh launcher \u2014 backgrounds Vite, opens Claude Code, auto-cleans on exit',
+          'make-it-mine.sh interactive agent setup (name, pronouns, role, operator)',
+          'Investiture page live on zerovector.design/investiture',
+        ],
+      },
+      {
+        version: 'v1.1',
+        date: 'Feb 11, 2026',
+        title: 'Scaffold Audit + Onboarding Overhaul',
+        items: [
+          'Fixed 20 audit findings from critical analysis',
+          'Cross-platform install.sh rewrite (Mac, Linux, WSL, Windows Git Bash)',
+          'Wired content/en.json into App.jsx \u2014 no more hardcoded strings',
+          'Added React Router, ErrorBoundary, Vitest with 9 tests',
+          'Context + useReducer state management in core/store.jsx',
+          'preflight.sh environment verification',
+        ],
+      },
+      {
+        version: 'v1.0',
+        date: 'Feb 5, 2026',
+        title: 'Architecture Scaffold Launch',
+        items: [
+          'Four-layer React architecture: UI, design system, core logic, services',
+          'CSS variable token system with light/dark theme support',
+          'Content layer for externalized strings',
+          'install.sh cross-platform setup script',
+          'CLAUDE.md auto-generation for Claude Code onboarding',
+        ],
       },
     ],
   },

@@ -63,6 +63,7 @@ function InvestiturePage() {
           <Link to="/" className="inv-nav-back">{inv.nav.back}</Link>
           <span className="inv-nav-brand">{inv.nav.brand}</span>
           <Link to="/open/learn" className="inv-nav-link">Learn</Link>
+          <Link to="/investiture/changelog" className="inv-nav-link">{inv.nav.changelog}</Link>
           <a href={inv.cta.primaryUrl} target="_blank" rel="noopener noreferrer" className="inv-nav-link">{inv.nav.github}</a>
         </div>
       </nav>
@@ -148,7 +149,7 @@ function InvestiturePage() {
         </div>
       </section>
 
-      {/* Skills — doctrine that enforces itself */}
+      {/* Skills — the skill chain */}
       <section className="inv-section">
         <div className="inv-container">
           <hr className="inv-rule" />
@@ -158,25 +159,22 @@ function InvestiturePage() {
             <p className="inv-section-body">{inv.skills.body}</p>
           </Animate>
           <Animate delay={1}>
-            <div className="inv-filetree-wrapper" style={{ marginTop: 32, marginBottom: 40, maxWidth: 320 }}>
-              <div className="inv-terminal-bar">
-                <div className="inv-terminal-dots" aria-hidden="true">
-                  <span /><span /><span />
-                </div>
-                <span className="inv-terminal-title">manifest</span>
-              </div>
-              <pre className="inv-filetree">{inv.skills.manifest}</pre>
-            </div>
+            <div className="inv-chain-flow">{inv.skills.flow}</div>
           </Animate>
           <Animate delay={2}>
-            <div className="inv-two-col">
-              {inv.skills.items.map((skill, i) => (
-                <div key={i} className="inv-card inv-card--gold">
-                  <h3 className="inv-card-title">{skill.name}</h3>
-                  <p className="inv-card-body">{skill.desc}</p>
+            <div className="inv-chain">
+              {inv.skills.chain.map((skill, i) => (
+                <div key={i} className="inv-chain-entry">
+                  <div className="inv-chain-entry-header">
+                    <span className="inv-chain-entry-name">{skill.name}</span>
+                    <span className="inv-chain-entry-role">{skill.role}</span>
+                  </div>
+                  <p className="inv-chain-entry-desc">{skill.desc}</p>
+                  <p className="inv-chain-entry-when">{skill.when}</p>
                 </div>
               ))}
             </div>
+            <p className="inv-reading-caption">{inv.skills.flowCaption}</p>
           </Animate>
         </div>
       </section>
@@ -283,8 +281,11 @@ function InvestiturePage() {
           <div className="inv-two-col">
             {inv.roadmap.versions.map((ver, i) => (
               <Animate key={i} delay={i}>
-                <div className="inv-card inv-card--gold">
-                  <div className="inv-roadmap-version">{ver.version}</div>
+                <div className={`inv-card inv-card--gold${ver.shipped ? ' inv-card--shipped' : ''}`}>
+                  <div className="inv-roadmap-version">
+                    {ver.version}
+                    {ver.shipped && <span className="inv-roadmap-shipped">Shipped</span>}
+                  </div>
                   <h3 className="inv-card-title">{ver.title}</h3>
                   <p className="inv-card-body">{ver.body}</p>
                 </div>
