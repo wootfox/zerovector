@@ -37,7 +37,7 @@ function InvestiturePage() {
     document.body.style.margin = '0';
     document.body.style.minHeight = '100vh';
     console.log(
-      '%c"The most important step a man can take is the next one." %c— Dalinar Kholin',
+      '%c"The most important step a man can take is the next one." %c- Dalinar Kholin',
       'color: #c9a84c; font-size: 14px; font-style: italic;',
       'color: #8a9ab5; font-size: 12px;'
     );
@@ -103,7 +103,7 @@ function InvestiturePage() {
                 }
               }}
               placeholder="What will you build?"
-              aria-label="Investiture — what will you build?"
+              aria-label="Investiture: what will you build?"
               spellCheck={false}
               autoComplete="off"
             />

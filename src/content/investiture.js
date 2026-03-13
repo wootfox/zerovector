@@ -20,7 +20,7 @@ const investiture = {
   whatItIs: {
     label: 'The Scaffold',
     headline: 'Start with intent. Build with structure.',
-    body: 'Investiture is a project scaffold that does more than set up your stack. It sets up your thinking. Every Investiture project starts with VECTOR.md \u2014 a doctrine file that captures who your project serves, what problem it solves, what you know, and what you still need to learn. Your AI agents read it before they write a line of code. Your team reads it before they make a decision. The result: every project starts aligned. Not with a blank canvas and good intentions. With structured intent and a clear reading order.',
+    body: 'Investiture is a project scaffold that does more than set up your stack. It sets up your thinking. Every Investiture project starts with VECTOR.md, a doctrine file that captures who your project serves, what problem it solves, what you know, and what you still need to learn. Your AI agents read it before they write a line of code. Your team reads it before they make a decision. The result: every project starts aligned. Not with a blank canvas and good intentions. With structured intent and a clear reading order.',
     callout: {
       title: 'What This Is Not',
       body: 'Not Tailwind. Not Bootstrap. Not a UI kit. Investiture is unopinionated about your design. It only cares about where your code lives, how your agents onboard, and what your project knows about itself. Bring your own design system, or ask Claude to build one.',
@@ -30,13 +30,13 @@ const investiture = {
   skills: {
     label: 'The Skill Chain',
     headline: 'Doctrine that enforces itself.',
-    body: 'Most scaffolds give you files and hope for the best. Investiture gives you files and skills that audit them. Each skill reads your doctrine at runtime \u2014 your rules, your conventions, your architecture \u2014 and holds your project to the standard you declared.',
+    body: 'Most scaffolds give you files and hope for the best. Investiture gives you files and skills that audit them. Each skill reads your doctrine at runtime: your rules, your conventions, your architecture. It holds your project to the standard you declared.',
     chain: [
       {
         name: '/invest-backfill',
         role: 'Bootstrap',
-        desc: 'Surveys an existing codebase \u2014 README, package.json, git history, file tree \u2014 and generates VECTOR.md, CLAUDE.md, and ARCHITECTURE.md with inferred content and operator prompts for the parts only you can fill in.',
-        when: 'Once, on existing projects that don\u2019t have doctrine yet.',
+        desc: 'Surveys an existing codebase (README, package.json, git history, file tree) and generates VECTOR.md, CLAUDE.md, and ARCHITECTURE.md with inferred content and operator prompts for the parts only you can fill in.',
+        when: 'Once, on existing projects that don\'t have doctrine yet.',
       },
       {
         name: '/invest-doctrine',
@@ -60,8 +60,9 @@ const investiture = {
     intro: 'Clone one repo. Get a working scaffold with doctrine, architecture, and research schemas built in.',
     fileTree: `investiture/
 \u251C\u2500\u2500 VECTOR.md              \u2190 Project doctrine (read first)
-\u251C\u2500\u2500 CLAUDE.md              \u2190 Agent persona (read second)
+\u251C\u2500\u2500 CLAUDE.md              \u2190 Contributor onboarding (read second)
 \u251C\u2500\u2500 ARCHITECTURE.md        \u2190 Technical guide (read third)
+\u251C\u2500\u2500 .claude/skills/        \u2190 Skill chain (backfill, doctrine, architecture)
 \u251C\u2500\u2500 /src                   \u2190 React 19 + Vite starter
 \u251C\u2500\u2500 /core                  \u2190 Pure logic, state, utilities
 \u251C\u2500\u2500 /services              \u2190 API layer
@@ -75,7 +76,8 @@ const investiture = {
     readingOrder: [
       { step: '01', file: 'VECTOR.md', desc: 'Why this project exists' },
       { step: '02', file: 'CLAUDE.md', desc: 'How your AI agent behaves' },
-      { step: '03', file: 'ARCHITECTURE.md', desc: 'What the technical implementation looks like' },
+      { step: '03', file: 'ARCHITECTURE.md', desc: 'Where things go and why' },
+      { step: '04', file: '.claude/skills/', desc: 'Skills that audit your doctrine' },
     ],
     readingOrderCaption: 'This is onboarding for both humans and agents.',
   },
@@ -83,7 +85,7 @@ const investiture = {
   connection: {
     label: 'The Convention',
     headline: 'Built on the Zero Vector methodology',
-    body: 'VECTOR.md is not just a file. It is a convention. Like README.md tells people what your project is, VECTOR.md tells agents and teammates why your project exists and what you know about your users. The /vector directory holds structured research artifacts \u2014 interviews, jobs to be done, personas, competitive analysis, blue ocean strategy, assumptions \u2014 in machine-readable schemas that any AI tool can consume. Investiture brings this convention into every new project automatically. You do not have to remember to add it. You do not have to set up the directory structure. It is there from the first commit.',
+    body: 'VECTOR.md is not just a file. It is a convention. Like README.md tells people what your project is, VECTOR.md tells agents and teammates why your project exists and what you know about your users. The /vector directory holds structured research artifacts (interviews, jobs to be done, personas, competitive analysis, blue ocean strategy, assumptions) in machine-readable schemas that any AI tool can consume. Investiture brings this convention into every new project automatically. You do not have to remember to add it. You do not have to set up the directory structure. It is there from the first commit.',
   },
 
   quickstart: {
@@ -103,13 +105,13 @@ const investiture = {
       {
         version: 'v1.3',
         title: 'Skill Chain',
-        body: 'Three skills \u2014 backfill, doctrine, architecture \u2014 that read your project doctrine at runtime and enforce it. Copy the skills into any repo.',
+        body: 'Three skills (backfill, doctrine, architecture) that read your project doctrine at runtime and enforce it. Copy the skills into any repo.',
         shipped: true,
       },
       {
         version: 'v2.0',
         title: 'Seeded Init',
-        body: 'Tell Investiture what you are building and who it is for. Choose your stack, activate the right Skills, and seed your research with first hypotheses \u2014 all from a single command.',
+        body: 'Tell Investiture what you are building and who it is for. Choose your stack, activate the right Skills, and seed your research with first hypotheses, all from a single command.',
       },
     ],
   },
@@ -140,7 +142,7 @@ const investiture = {
           'VECTOR.md, CLAUDE.md, ARCHITECTURE.md doctrine templates',
           '/vector directory with six research schemas (persona, JTBD, assumption, interview, competitive, blue ocean)',
           'ADR template at /vector/decisions/',
-          'start.sh launcher \u2014 backgrounds Vite, opens Claude Code, auto-cleans on exit',
+          'start.sh launcher: backgrounds Vite, opens Claude Code, auto-cleans on exit',
           'make-it-mine.sh interactive agent setup (name, pronouns, role, operator)',
           'Investiture page live on zerovector.design/investiture',
         ],
@@ -152,7 +154,7 @@ const investiture = {
         items: [
           'Fixed 20 audit findings from critical analysis',
           'Cross-platform install.sh rewrite (Mac, Linux, WSL, Windows Git Bash)',
-          'Wired content/en.json into App.jsx \u2014 no more hardcoded strings',
+          'Wired content/en.json into App.jsx, no more hardcoded strings',
           'Added React Router, ErrorBoundary, Vitest with 9 tests',
           'Context + useReducer state management in core/store.jsx',
           'preflight.sh environment verification',
@@ -175,7 +177,7 @@ const investiture = {
 
   quote: {
     text: 'The most important step a person can take is always the next one.',
-    cite: 'Dalinar Kholin \u2014 The Stormlight Archive',
+    cite: 'Dalinar Kholin, The Stormlight Archive',
     context: 'Named for Investiture, the fundamental magical energy of Brandon Sanderson\'s Cosmere universe. Like its namesake, this scaffold is a foundation that can manifest as many different things.',
   },
 

@@ -12,7 +12,7 @@ function InvestitureChangelogPage() {
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
   useSEO({
-    title: 'Changelog — Investiture',
+    title: 'Changelog | Investiture',
     description: 'Version history for the Investiture project scaffold and skill chain.',
     path: '/investiture/changelog',
   });
