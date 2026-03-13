@@ -5998,6 +5998,7 @@ a:hover {
   background: #0a1628;
   color: #e8e0d0;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Blueprint grid background */
@@ -6481,6 +6482,7 @@ a:hover {
   max-width: 960px;
   margin: 0 auto;
   padding: 0 24px;
+  overflow: hidden;
 }
 
 .inv-rule {
@@ -6616,7 +6618,8 @@ a:hover {
   padding: 14px 24px;
   margin-bottom: 32px;
   cursor: text;
-  max-width: 100%;
+  max-width: calc(100% - 48px);
+  box-sizing: border-box;
   background: rgba(6, 12, 24, 0.6);
   border: 1px solid rgba(201, 168, 76, 0.1);
   border-radius: 12px;
@@ -6879,6 +6882,7 @@ a:hover {
   border: 1px solid rgba(201, 168, 76, 0.2);
   overflow: hidden;
   margin-bottom: 48px;
+  box-sizing: border-box;
 }
 
 .inv-filetree {
@@ -7557,6 +7561,8 @@ a:hover {
   background: rgba(6, 12, 24, 0.6);
   border: 1px solid rgba(95, 172, 200, 0.2);
   letter-spacing: 0.02em;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .inv-chain {
@@ -7587,6 +7593,7 @@ a:hover {
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .inv-chain-entry-name {
@@ -7612,6 +7619,7 @@ a:hover {
   color: #8a9ab5;
   line-height: 1.7;
   margin: 0 0 8px;
+  overflow-wrap: break-word;
 }
 
 .inv-chain-entry-when {
