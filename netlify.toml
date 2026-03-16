@@ -10,16 +10,6 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-[[redirects]]
-  from = "/api/kestrel/checkin"
-  to = "/.netlify/functions/kestrel-checkin"
-  status = 200
-
-[[redirects]]
-  from = "/api/kestrel/checkins"
-  to = "/.netlify/functions/kestrel-checkin"
-  status = 200
-
 # Open Vector 301 redirects → open.zerovector.design
 [[redirects]]
   from = "/open/learn/*"
