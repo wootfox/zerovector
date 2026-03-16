@@ -65,13 +65,13 @@ export default {
       {
         type: 'exercise',
         title: 'Read a VECTOR.md',
-        body: 'Go to the Investiture scaffold repository at github.com/zerovectordesign/investiture and find the VECTOR.md file. Open it and answer these questions: (1) What problem is the project solving? (2) Who are the users? (3) What architecture decisions were made, and what reasons are given? (4) What constraints are listed? (5) How does the Current State section help an AI agent who is reading this for the first time? You do not need to understand every technical term. Focus on the structure: how the document is organized, what information it prioritizes, and how it would help someone (or something) get up to speed quickly.',
+        body: 'Go to the Investiture scaffold repository at github.com/erikaflowers/investiture and find the VECTOR.md file. Open it and answer these questions: (1) What problem is the project solving? (2) Who are the users? (3) What architecture decisions were made, and what reasons are given? (4) What constraints are listed? (5) How does the Current State section help an AI agent who is reading this for the first time? You do not need to understand every technical term. Focus on the structure: how the document is organized, what information it prioritizes, and how it would help someone (or something) get up to speed quickly.',
       },
       {
         type: 'resources',
         heading: 'Links',
         items: [
-          { title: 'Investiture Scaffold Repository', url: 'https://github.com/zerovectordesign/investiture', note: 'A real VECTOR.md in a real project.' },
+          { title: 'Investiture Scaffold Repository', url: 'https://github.com/erikaflowers/investiture', note: 'A real VECTOR.md in a real project.' },
           { title: 'Investiture Framework', url: 'https://zerovector.design/investiture', note: 'The Investiture framework page on Zero Vector.' },
           { title: 'Zero Vector Substack', url: 'https://eflowers.substack.com', note: 'Articles on the methodology.' },
         ],

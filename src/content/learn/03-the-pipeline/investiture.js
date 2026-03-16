@@ -1,11 +1,11 @@
 export default {
   slug: 'investiture',
   title: 'Investiture \u2014 The Framework',
-  subtitle: 'The scaffold that turns your Pipeline work into a structured, AI-ready project.',
+  subtitle: 'The scaffold that turns your Pipeline work into a structured, AI-ready project. Now with a skill chain that enforces your doctrine.',
   duration: '20 min',
   status: 'available',
-  badge: 'new',
-  updatedAt: '2026-03-03',
+  badge: 'updated',
+  updatedAt: '2026-03-14',
   content: {
     sections: [
       {
@@ -15,7 +15,8 @@ export default {
           'You have just spent seven lessons walking through the full product development pipeline: research, synthesis, jobs to be done, ideation, prototyping, validation, shipping. That is a lot of thinking. A lot of artifacts. A lot of decisions.',
           'Now what? You open a blank folder and start from scratch?',
           'No. That is what Investiture solves.',
-          'Investiture is a project scaffold, a starter architecture that encodes Zero Vector principles into the file structure, the configuration, and the documentation of a new project. When you clone Investiture, you do not get a blank canvas. You get a canvas with the grid already drawn, the palette already mixed, and a note on the easel explaining what you are painting and why.',
+          'Investiture is a project scaffold with a skill chain that enforces your doctrine. Run npx investiture init in any existing project and it injects structured research schemas, architecture skills, and the VECTOR.md convention without touching your code. Or clone the full scaffold for a greenfield project with React, Vite, and the doctrine system built in.',
+          'As of v1.3, Investiture includes three executable skills (/invest-backfill, /invest-doctrine, /invest-architecture) that read your doctrine files at runtime and audit your project against them. Backfill surveys your codebase and generates starter doctrine. Doctrine validates it. Architecture enforces it.',
           'The name comes from Brandon Sanderson\'s Cosmere novels, where Investiture is the fundamental energy that powers all magic systems. In Zero Vector, Investiture is the fundamental structure that powers all projects. Different projects, different features, but the same underlying architecture making it all work.',
         ],
       },
@@ -33,17 +34,16 @@ export default {
         type: 'text',
         heading: 'What the Scaffold Gives You',
         body: [
-          'When you clone the Investiture scaffold, you get a project that is ready for AI-assisted development from the first commit. Here is what is inside:',
-          'Project structure follows a clear separation of concerns. Frontend code, backend code, shared utilities, and configuration each have their own space. No guessing where a new component should live.',
-          'CLAUDE.md is already in place. This is the file that tells your AI agents how to behave in this project: the coding conventions, the commit message format, the testing expectations. You learned about CLAUDE.md in Level 04 (or you will). The scaffold includes a working example you can customize.',
-          'VECTOR.md is already in place. This is the file from Level 01 that captures your project intent, users, architecture, and constraints. The scaffold includes a template with all the sections pre-structured. You fill in the blanks with the research and planning work you did in this level.',
-          'Configuration is pre-wired. Environment variables, deployment settings, linting rules, the basics that every project needs but nobody wants to set up from scratch.',
-          'Documentation structure has a home. Architecture decision records, API documentation, and a changelog all have designated locations. Documentation does not get written if there is nowhere obvious to put it.',
+          'Run npx investiture init in any project and you get the skill chain and research system injected without touching your existing code. Clone the full scaffold for a greenfield project. Either way, here is what you get:',
+          'Three executable skills that read your doctrine at runtime. /invest-backfill surveys your codebase and generates VECTOR.md, CLAUDE.md, and ARCHITECTURE.md. /invest-doctrine validates those files for completeness and consistency. /invest-architecture checks every source file against your declared layers, naming, and import rules.',
+          'VECTOR.md captures your project intent, users, architecture, and constraints. CLAUDE.md frames contributor onboarding for both humans and AI agents. ARCHITECTURE.md declares your layers, stack, and conventions. These are not templates you fill in once and forget. The skill chain audits them continuously.',
+          'Six research schemas in the /vector directory: persona, jobs to be done, assumption, interview, competitive analysis, and blue ocean strategy. All in machine-readable JSON that any AI tool can consume.',
+          'Architecture Decision Records in /vector/decisions/ and audit reports in /vector/audits/. Structured places for structured thinking.',
         ],
       },
       {
         type: 'callout',
-        body: 'The best projects are not the ones with the most features. They are the ones where every file knows why it exists. Investiture gives you that from the first commit. Your AI agents read the structure and immediately understand the conventions. Your future self reads the documentation and immediately remembers the reasoning.',
+        body: 'The best projects are not the ones with the most features. They are the ones where every file knows why it exists. Investiture gives you that from the first commit. Your AI agents read the structure and immediately understand the conventions. The skill chain ensures those conventions stay enforced as the project grows.',
       },
       {
         type: 'text',
@@ -61,18 +61,18 @@ export default {
       },
       {
         type: 'code',
-        body: 'investiture/\n\u251C\u2500\u2500 README.md                 # Project overview, setup instructions\n\u251C\u2500\u2500 CLAUDE.md                 # AI agent behavior configuration\n\u251C\u2500\u2500 VECTOR.md                 # Project intent, users, architecture\n\u251C\u2500\u2500 .env.example              # Environment variable template\n\u2502\n\u251C\u2500\u2500 src/\n\u2502   \u251C\u2500\u2500 app/                  # Application entry, routing, layout\n\u2502   \u251C\u2500\u2500 components/           # Reusable UI components\n\u2502   \u2502   \u251C\u2500\u2500 ui/               # Generic (buttons, inputs, modals)\n\u2502   \u2502   \u2514\u2500\u2500 features/         # Feature-specific components\n\u2502   \u251C\u2500\u2500 services/             # API calls, external integrations\n\u2502   \u251C\u2500\u2500 hooks/                # Custom React hooks\n\u2502   \u251C\u2500\u2500 utils/                # Pure utility functions\n\u2502   \u2514\u2500\u2500 styles/               # Global styles, CSS variables\n\u2502\n\u251C\u2500\u2500 api/                      # Backend (FastAPI or equivalent)\n\u2502   \u251C\u2500\u2500 routers/              # Route handlers, grouped by domain\n\u2502   \u251C\u2500\u2500 services/             # Business logic\n\u2502   \u251C\u2500\u2500 models/               # Data models, validation\n\u2502   \u2514\u2500\u2500 migrations/           # Database schema changes\n\u2502\n\u251C\u2500\u2500 docs/\n\u2502   \u251C\u2500\u2500 architecture/         # ADRs (Architecture Decision Records)\n\u2502   \u251C\u2500\u2500 api/                  # API endpoint documentation\n\u2502   \u2514\u2500\u2500 CHANGELOG.md          # What changed and when\n\u2502\n\u2514\u2500\u2500 scripts/                  # Utility scripts, setup helpers',
+        body: 'your-project/\n\u251C\u2500\u2500 VECTOR.md                 # Project doctrine (read first)\n\u251C\u2500\u2500 CLAUDE.md                 # Contributor onboarding (read second)\n\u251C\u2500\u2500 ARCHITECTURE.md           # Technical guide (read third)\n\u251C\u2500\u2500 .claude/skills/           # Skill chain\n\u2502   \u251C\u2500\u2500 invest-backfill/      # Survey codebase, generate doctrine\n\u2502   \u251C\u2500\u2500 invest-doctrine/      # Validate doctrine files\n\u2502   \u2514\u2500\u2500 invest-architecture/  # Enforce architecture rules\n\u2502\n\u251C\u2500\u2500 vector/\n\u2502   \u251C\u2500\u2500 schemas/              # 6 research schemas (JSON)\n\u2502   \u251C\u2500\u2500 research/             # Your structured findings\n\u2502   \u251C\u2500\u2500 decisions/            # Architecture Decision Records\n\u2502   \u2514\u2500\u2500 audits/               # Skill chain audit reports\n\u2502\n\u2514\u2500\u2500 (your existing code)      # Investiture does not touch your code',
       },
       {
         type: 'exercise',
-        title: 'Clone and Explore',
-        body: 'Clone the Investiture repository: git clone https://github.com/zerovectordesign/investiture.git — then cd investiture and open it in your editor. Spend a few minutes browsing the file tree. Notice the organization and how each folder\'s contents match its name. Read CLAUDE.md — what conventions does it establish? What patterns does it enforce? Read VECTOR.md — which sections map to work you did earlier in this level? (Research \u2192 Project Overview. JTBD \u2192 Jobs to Be Done. Architecture decisions \u2192 Architecture.) Look at the docs/ folder and open an Architecture Decision Record if one exists. Notice the format: context, decision, consequences. Now ask yourself: if an AI agent cloned this project and read these files, how much would it understand before writing a single line of code? That is the power of a structured scaffold.',
+        title: 'Try It',
+        body: 'Create a test directory (mkdir investiture-test && cd investiture-test && git init) and run npx investiture init. Watch what it installs. Browse the .claude/skills/ directory and read one of the SKILL.md files — notice how each skill declares what it reads, what it checks, and what it produces. Open vector/schemas/ and pick a schema — notice the machine-readable structure. Now open Claude Code in that directory and run /invest-backfill. Watch it survey the (empty) project and generate starter doctrine. Read the VECTOR.md it creates. Ask yourself: if an AI agent read these files, how much would it understand before writing a single line of code? That is the power of a structured scaffold.',
       },
       {
         type: 'resources',
         heading: 'Links',
         items: [
-          { title: 'Investiture Scaffold Repository', url: 'https://github.com/zerovectordesign/investiture', note: 'Clone it, explore it, make it yours.' },
+          { title: 'Investiture on GitHub', url: 'https://github.com/erikaflowers/investiture', note: 'npx investiture init — or clone the full scaffold.' },
           { title: 'Investiture Framework Page', url: 'https://zerovector.design/investiture', note: 'The Investiture deep dive on Zero Vector.' },
           { title: 'VECTOR.md Lesson (Level 01)', url: 'https://zerovector.design/open/learn/01-foundation/vector-md', note: 'The artifact that gives agents project context.' },
         ],

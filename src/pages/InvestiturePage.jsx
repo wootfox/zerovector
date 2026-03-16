@@ -37,7 +37,7 @@ function InvestiturePage() {
     document.body.style.margin = '0';
     document.body.style.minHeight = '100vh';
     console.log(
-      '%c"The most important step a man can take is the next one." %c— Dalinar Kholin',
+      '%c"The most important step a man can take is the next one." %c- Dalinar Kholin',
       'color: #c9a84c; font-size: 14px; font-style: italic;',
       'color: #8a9ab5; font-size: 12px;'
     );
@@ -60,10 +60,16 @@ function InvestiturePage() {
       {/* Nav */}
       <nav className="inv-nav">
         <div className="inv-nav-inner">
-          <Link to="/" className="inv-nav-back">{inv.nav.back}</Link>
-          <span className="inv-nav-brand">{inv.nav.brand}</span>
-          <Link to="/open/learn" className="inv-nav-link">Learn</Link>
-          <a href={inv.cta.primaryUrl} target="_blank" rel="noopener noreferrer" className="inv-nav-link">{inv.nav.github}</a>
+          <div className="inv-nav-left">
+            <Link to="/" className="inv-nav-back">{inv.nav.back}</Link>
+            <span className="inv-nav-sep" aria-hidden="true">|</span>
+            <span className="inv-nav-brand">{inv.nav.brand}</span>
+          </div>
+          <div className="inv-nav-center">
+            <a href={inv.cta.primaryUrl} target="_blank" rel="noopener noreferrer" className="inv-nav-btn">{inv.cta.primaryCta}</a>
+            <Link to="/open/learn/curriculum/03-the-pipeline/investiture" className="inv-nav-btn inv-nav-btn--outline">Learn</Link>
+            <Link to="/investiture/changelog" className="inv-nav-btn inv-nav-btn--outline">{inv.nav.changelog}</Link>
+          </div>
         </div>
       </nav>
 
@@ -71,7 +77,6 @@ function InvestiturePage() {
       <section className="inv-section inv-hero">
         <div className="inv-container">
           <div className="inv-hero-glow" aria-hidden="true" />
-          <div className="inv-label">{inv.hero.label}</div>
           <p className="inv-hero-epigraph">{inv.hero.epigraph[0]}<br />{inv.hero.epigraph[1]}</p>
           <div className="inv-hero-ornament" aria-hidden="true" />
           <h1 className="inv-sr-only">Investiture</h1>
@@ -102,7 +107,7 @@ function InvestiturePage() {
                 }
               }}
               placeholder="What will you build?"
-              aria-label="Investiture — what will you build?"
+              aria-label="Investiture: what will you build?"
               spellCheck={false}
               autoComplete="off"
             />
@@ -133,7 +138,6 @@ function InvestiturePage() {
       {/* What It Is */}
       <section className="inv-section">
         <div className="inv-container">
-          <hr className="inv-rule" />
           <Animate>
             <div className="inv-label">{inv.whatItIs.label}</div>
             <h2 className="inv-section-headline">{inv.whatItIs.headline}</h2>
@@ -148,35 +152,31 @@ function InvestiturePage() {
         </div>
       </section>
 
-      {/* Skills — doctrine that enforces itself */}
+      {/* Skills — the skill chain */}
       <section className="inv-section">
         <div className="inv-container">
-          <hr className="inv-rule" />
           <Animate>
             <div className="inv-label">{inv.skills.label}</div>
             <h2 className="inv-section-headline">{inv.skills.headline}</h2>
             <p className="inv-section-body">{inv.skills.body}</p>
           </Animate>
           <Animate delay={1}>
-            <div className="inv-filetree-wrapper" style={{ marginTop: 32, marginBottom: 40, maxWidth: 320 }}>
-              <div className="inv-terminal-bar">
-                <div className="inv-terminal-dots" aria-hidden="true">
-                  <span /><span /><span />
-                </div>
-                <span className="inv-terminal-title">manifest</span>
-              </div>
-              <pre className="inv-filetree">{inv.skills.manifest}</pre>
-            </div>
+            <div className="inv-chain-flow">{inv.skills.flow}</div>
           </Animate>
           <Animate delay={2}>
-            <div className="inv-two-col">
-              {inv.skills.items.map((skill, i) => (
-                <div key={i} className="inv-card inv-card--gold">
-                  <h3 className="inv-card-title">{skill.name}</h3>
-                  <p className="inv-card-body">{skill.desc}</p>
+            <div className="inv-chain">
+              {inv.skills.chain.map((skill, i) => (
+                <div key={i} className="inv-chain-entry">
+                  <div className="inv-chain-entry-header">
+                    <span className="inv-chain-entry-name">{skill.name}</span>
+                    <span className="inv-chain-entry-role">{skill.role}</span>
+                  </div>
+                  <p className="inv-chain-entry-desc">{skill.desc}</p>
+                  <p className="inv-chain-entry-when">{skill.when}</p>
                 </div>
               ))}
             </div>
+            <p className="inv-reading-caption">{inv.skills.flowCaption}</p>
           </Animate>
         </div>
       </section>
@@ -184,7 +184,6 @@ function InvestiturePage() {
       {/* What You Get — file tree + reading order */}
       <section className="inv-section inv-section--blueprint">
         <div className="inv-container">
-          <hr className="inv-rule" />
           <Animate>
             <div className="inv-label">{inv.whatYouGet.label}</div>
             <p className="inv-intro">{inv.whatYouGet.intro}</p>
@@ -220,7 +219,6 @@ function InvestiturePage() {
       {/* The Zero Vector Connection */}
       <section className="inv-section">
         <div className="inv-container">
-          <hr className="inv-rule" />
           <Animate>
             <div className="inv-label">{inv.connection.label}</div>
             <h2 className="inv-section-headline">{inv.connection.headline}</h2>
@@ -230,15 +228,17 @@ function InvestiturePage() {
       </section>
 
       {/* Quick Start */}
-      <section className="inv-section">
+      <section className="inv-section inv-section--blueprint">
         <div className="inv-container">
-          <hr className="inv-rule" />
           <Animate>
             <div className="inv-label">{inv.quickstart.label}</div>
-            <p className="inv-intro">{inv.quickstart.intro}</p>
           </Animate>
+
+          {/* Path 1: Existing project */}
           <Animate delay={1}>
-            <div className="inv-terminal">
+            <h3 className="inv-quickstart-headline">{inv.quickstart.existing.headline}</h3>
+            <p className="inv-quickstart-intro">{inv.quickstart.existing.intro}</p>
+            <div className="inv-terminal inv-terminal--hero">
               <div className="inv-terminal-bar">
                 <div className="inv-terminal-dots" aria-hidden="true">
                   <span /><span /><span />
@@ -246,18 +246,18 @@ function InvestiturePage() {
                 <span className="inv-terminal-title">terminal</span>
               </div>
               <div className="inv-terminal-body">
-                {inv.quickstart.commands.map((cmd, i) => (
+                {inv.quickstart.existing.commands.map((cmd, i) => (
                   <div
                     key={i}
-                    className={`inv-terminal-line inv-terminal-line--copyable${copiedIdx === i ? ' inv-terminal-line--copied' : ''}`}
-                    onClick={() => copyCmd(cmd, i)}
+                    className={`inv-terminal-line inv-terminal-line--copyable${copiedIdx === `e${i}` ? ' inv-terminal-line--copied' : ''}`}
+                    onClick={() => copyCmd(cmd, `e${i}`)}
                     role="button"
                     tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && copyCmd(cmd, i)}
+                    onKeyDown={(e) => e.key === 'Enter' && copyCmd(cmd, `e${i}`)}
                   >
                     <span className="inv-terminal-prompt">$</span>
                     <span className="inv-terminal-cmd">{cmd}</span>
-                    <span className="inv-terminal-copy-hint">{copiedIdx === i ? 'Copied!' : 'Click to copy'}</span>
+                    <span className="inv-terminal-copy-hint">{copiedIdx === `e${i}` ? 'Copied!' : 'Click to copy'}</span>
                   </div>
                 ))}
                 <div className="inv-terminal-line">
@@ -266,9 +266,55 @@ function InvestiturePage() {
                 </div>
               </div>
             </div>
+            <p className="inv-after">{inv.quickstart.existing.after}</p>
+            <div className="inv-quickstart-alt">
+              <span className="inv-quickstart-alt-label">{inv.quickstart.existing.altLabel}</span>
+              <code
+                className={`inv-quickstart-alt-cmd${copiedIdx === 'alt' ? ' inv-quickstart-alt-cmd--copied' : ''}`}
+                onClick={() => copyCmd(inv.quickstart.existing.alt, 'alt')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && copyCmd(inv.quickstart.existing.alt, 'alt')}
+              >
+                {inv.quickstart.existing.alt}
+                <span className="inv-quickstart-alt-hint">{copiedIdx === 'alt' ? 'Copied!' : 'Click to copy'}</span>
+              </code>
+            </div>
           </Animate>
+
+          {/* Path 2: New project */}
           <Animate delay={2}>
-            <p className="inv-after">{inv.quickstart.after}</p>
+            <h3 className="inv-quickstart-headline" style={{ marginTop: 48 }}>{inv.quickstart.fresh.headline}</h3>
+            <p className="inv-quickstart-intro">{inv.quickstart.fresh.intro}</p>
+            <div className="inv-terminal">
+              <div className="inv-terminal-bar">
+                <div className="inv-terminal-dots" aria-hidden="true">
+                  <span /><span /><span />
+                </div>
+                <span className="inv-terminal-title">terminal</span>
+              </div>
+              <div className="inv-terminal-body">
+                {inv.quickstart.fresh.commands.map((cmd, i) => (
+                  <div
+                    key={i}
+                    className={`inv-terminal-line inv-terminal-line--copyable${copiedIdx === `f${i}` ? ' inv-terminal-line--copied' : ''}`}
+                    onClick={() => copyCmd(cmd, `f${i}`)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === 'Enter' && copyCmd(cmd, `f${i}`)}
+                  >
+                    <span className="inv-terminal-prompt">$</span>
+                    <span className="inv-terminal-cmd">{cmd}</span>
+                    <span className="inv-terminal-copy-hint">{copiedIdx === `f${i}` ? 'Copied!' : 'Click to copy'}</span>
+                  </div>
+                ))}
+                <div className="inv-terminal-line">
+                  <span className="inv-terminal-prompt">$</span>
+                  <span className="inv-terminal-cursor" />
+                </div>
+              </div>
+            </div>
+            <p className="inv-after">{inv.quickstart.fresh.after}</p>
           </Animate>
         </div>
       </section>
@@ -276,15 +322,17 @@ function InvestiturePage() {
       {/* What's Coming — Roadmap */}
       <section className="inv-section">
         <div className="inv-container">
-          <hr className="inv-rule" />
           <Animate>
             <div className="inv-label">{inv.roadmap.label}</div>
           </Animate>
-          <div className="inv-two-col">
+          <div className="inv-three-col">
             {inv.roadmap.versions.map((ver, i) => (
               <Animate key={i} delay={i}>
-                <div className="inv-card inv-card--gold">
-                  <div className="inv-roadmap-version">{ver.version}</div>
+                <div className={`inv-card inv-card--gold${ver.shipped ? ' inv-card--shipped' : ''}`}>
+                  <div className="inv-roadmap-version">
+                    {ver.version}
+                    {ver.shipped && <span className="inv-roadmap-shipped">Shipped</span>}
+                  </div>
                   <h3 className="inv-card-title">{ver.title}</h3>
                   <p className="inv-card-body">{ver.body}</p>
                 </div>
@@ -311,7 +359,6 @@ function InvestiturePage() {
       {/* Bottom CTA */}
       <section className="inv-section inv-cta-section">
         <div className="inv-container">
-          <hr className="inv-rule" />
           <Animate>
             <div className="inv-cta-buttons">
               <a href={inv.cta.primaryUrl} target="_blank" rel="noopener noreferrer" className="inv-btn inv-btn--primary">{inv.cta.primaryCta}</a>

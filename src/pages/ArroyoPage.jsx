@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Animate from '../components/Animate';
-import NotifyForm from '../components/NotifyForm';
 import useSEO from '../hooks/useSEO';
-import ArroyoCompTable from '../components/arroyo/ArroyoCompTable';
 import ArroyoPipelineRow from '../components/arroyo/ArroyoPipelineRow';
-import ArroyoPriceCard from '../components/arroyo/ArroyoPriceCard';
-import ArroyoCounter from '../components/arroyo/ArroyoCounter';
 import '../styles/site.css';
 import en from '../content/en';
 
@@ -22,7 +18,7 @@ function ArroyoPage() {
 
   useSEO({
     title: 'Arroyo Labs',
-    description: 'A working MVP, VECTOR.md doctrine, and agent config. $5,000. You own the repo. We exit.',
+    description: 'We build your MVP. Real code, real architecture, real product. You own the repo. We exit.',
     path: '/arroyo',
   });
 
@@ -95,73 +91,34 @@ function ArroyoPage() {
           <img className="arr-cactus-group" src="/arroyo-scene/cactus-group-1.png" alt="" />
           <img className="arr-saguaro arr-saguaro--2" src="/arroyo-scene/saguaro-2.png" alt="" />
         </div>
-        {/* Sky zone — above the horizon */}
-        <div className="arr-hero-sky">
-          <div className="arr-hero-sky-overlay" />
-          <div className="arr-container">
-            <Animate>
-              <div className="arr-hero-tag">{arr.hero.label}</div>
-            </Animate>
-            <Animate>
-              <h1 className="arr-hero-title">
-                {arr.hero.titleLines[0]}<br />
-                <span className="arr-hero-accent">{arr.hero.titleLines[1]}</span><br />
-                {arr.hero.titleLines[2]}
-              </h1>
-            </Animate>
-            <Animate>
-              <p className="arr-hero-subtitle">
-                {arr.hero.subtitle}{' '}
-                <span className="arr-hero-price">{arr.hero.price}</span>{' '}
-                {arr.hero.subtitleEnd}
-              </p>
-            </Animate>
-            <Animate>
-              <div className="arr-hero-ctas">
-                <a href={arr.cta.bookingUrl} target="_blank" rel="noopener noreferrer" className="arr-btn arr-btn--primary">
-                  {arr.hero.primaryCta} &rarr;
-                </a>
-                <Link to="/investiture" className="arr-btn arr-btn--outline">
-                  {arr.hero.secondaryCta}
-                </Link>
-              </div>
-            </Animate>
-          </div>
-        </div>
-        {/* Ground zone — below the horizon */}
-        <div className="arr-hero-ground-content">
-          <div className="arr-container">
-            <Animate>
-              <div className="arr-terminal">
-                <div className="arr-terminal-bar">
-                  <div className="arr-terminal-dots">
-                    <span className="arr-dot arr-dot--red" />
-                    <span className="arr-dot arr-dot--yellow" />
-                    <span className="arr-dot arr-dot--green" />
-                  </div>
-                  <span className="arr-terminal-title">terminal</span>
-                </div>
-                <div className="arr-terminal-body">
-                  {arr.hero.terminal.map((line, i) => (
-                    <div
-                      key={i}
-                      className={`arr-terminal-line ${
-                        line.startsWith('$') ? 'arr-terminal-line--cmd' :
-                        line.startsWith('>') ? 'arr-terminal-line--output' :
-                        ''
-                      }`}
-                    >
-                      {line}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Animate>
+
+        {/* White card floating over the scene */}
+        <div className="arr-hero-card-wrapper">
+          <div className="arr-hero-card">
+            <h1 className="arr-hero-title">
+              {arr.hero.titleLines[0]}<br />
+              <span className="arr-hero-accent">{arr.hero.titleLines[1]}</span><br />
+              {arr.hero.titleLines[2]}
+            </h1>
+            <p className="arr-hero-subtitle">
+              {arr.hero.subtitle}
+            </p>
+            <p className="arr-hero-aside">
+              {arr.hero.aside}
+            </p>
+            <p className="arr-hero-credibility">
+              {arr.hero.credibility}
+            </p>
+            <div className="arr-hero-ctas">
+              <a href={arr.cta.bookingUrl} target="_blank" rel="noopener noreferrer" className="arr-btn arr-btn--primary">
+                {arr.hero.primaryCta} &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* The Handoff Problem */}
+      {/* The Real Question */}
       <section className="arr-section arr-section--elevated">
         <div className="arr-container">
           <Animate>
@@ -171,53 +128,44 @@ function ArroyoPage() {
                 <span key={i}>{line}{i === 0 && <br />}</span>
               ))}
             </h2>
-            <p className="arr-tagline">{arr.problem.tagline}</p>
           </Animate>
-          <div className="arr-problem-grid">
-            <Animate>
-              <div className="arr-problem-body">
-                {arr.problem.bodyLeft.map((p, i) => (
-                  <p key={i} className="arr-body">{p}</p>
-                ))}
-              </div>
-            </Animate>
-            <Animate>
-              <div className="arr-problem-gaps">
-                <div className="arr-problem-gaps-label">{arr.problem.gapsLabel}</div>
-                {arr.problem.gaps.map((item, i) => (
-                  <div key={i} className={`arr-problem-gap ${i < arr.problem.gaps.length - 1 ? 'arr-problem-gap--bordered' : ''}`}>
-                    <span className="arr-problem-gap-tool">{item.tool}</span>
-                    <span className="arr-problem-gap-text">&mdash; {item.gap}</span>
+          <Animate>
+            <div className="arr-problem-body">
+              {arr.problem.body.map((p, i) => (
+                <p key={i} className="arr-body">{p}</p>
+              ))}
+            </div>
+          </Animate>
+        </div>
+      </section>
+
+      {/* Three Paths */}
+      <section id="compare" className="arr-section arr-section--light">
+        <div className="arr-container">
+          <Animate>
+            <div className="arr-label arr-label--dark">{arr.compare.label}</div>
+            <h2 className="arr-headline arr-headline--dark">{arr.compare.headline}</h2>
+            <p className="arr-subtitle arr-subtitle--dark">{arr.compare.subtitle}</p>
+          </Animate>
+          <div className="arr-approaches">
+            {arr.compare.approaches.map((a, i) => (
+              <Animate key={i}>
+                <div className={`arr-approach arr-approach--${a.variant}`}>
+                  <div className="arr-approach-name">{a.name}</div>
+                  <p className="arr-approach-desc">{a.desc}</p>
+                  <div className="arr-approach-items">
+                    {a.items.map((item, j) => (
+                      <div key={j} className="arr-approach-item">{item}</div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </Animate>
+                </div>
+              </Animate>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Competitor Table */}
-      <section id="compare" className="arr-section arr-section--light">
-        <div className="arr-container arr-container--wide">
-          <Animate>
-            <div className="arr-label arr-label--dark">{arr.compare.label}</div>
-            <h2 className="arr-headline arr-headline--dark">
-              {arr.compare.headline.split('\n').map((line, i) => (
-                <span key={i}>{line}{i === 0 && <br />}</span>
-              ))}
-            </h2>
-            <p className="arr-subtitle arr-subtitle--dark">{arr.compare.subtitle}</p>
-          </Animate>
-          <Animate>
-            <div className="arr-table-container">
-              <ArroyoCompTable columns={arr.compare.columns} competitors={arr.compare.competitors} />
-            </div>
-            <p className="arr-legend">{arr.compare.legend}</p>
-          </Animate>
-        </div>
-      </section>
-
-      {/* Pipeline */}
+      {/* What's Different */}
       <section className="arr-section arr-section--light-elevated">
         <div className="arr-container">
           <Animate>
@@ -237,7 +185,7 @@ function ArroyoPage() {
 
       {/* How It Works */}
       <section id="how-it-works" className="arr-section arr-section--teal">
-        <div className="arr-container arr-container--wide">
+        <div className="arr-container">
           <Animate>
             <div className="arr-label">{arr.howItWorks.label}</div>
             <h2 className="arr-headline">{arr.howItWorks.headline}</h2>
@@ -260,7 +208,7 @@ function ArroyoPage() {
 
       {/* What You Get */}
       <section className="arr-section">
-        <div className="arr-container arr-container--wide">
+        <div className="arr-container">
           <Animate>
             <div className="arr-label">{arr.whatYouGet.label}</div>
             <h2 className="arr-headline">{arr.whatYouGet.headline}</h2>
@@ -269,17 +217,11 @@ function ArroyoPage() {
           <div className="arr-deliverables">
             {arr.whatYouGet.deliverables.map((d, i) => (
               <Animate key={i}>
-                {d.separator && (
-                  <div className="arr-deliverable-separator">
-                    <span>{arr.whatYouGet.separatorLabel}</span>
-                  </div>
-                )}
                 <div className="arr-deliverable">
                   <div className={`arr-deliverable-num arr-deliverable-num--${d.variant}`}>{d.num}</div>
                   <div className="arr-deliverable-content">
-                    <div className={`arr-deliverable-title ${d.separator ? 'arr-deliverable-title--emphasis' : ''}`}>{d.title}</div>
+                    <div className="arr-deliverable-title">{d.title}</div>
                     <div className="arr-deliverable-body">{d.body}</div>
-                    <div className="arr-deliverable-vs">{d.vs}</div>
                   </div>
                 </div>
               </Animate>
@@ -288,43 +230,20 @@ function ArroyoPage() {
         </div>
       </section>
 
-      {/* Product Facts */}
-      <section className="arr-section arr-section--elevated arr-section--compact">
-        <div className="arr-container">
-          <div className="arr-stats">
-            {arr.stats.map((s, i) => (
-              <div key={i} className={`arr-stat ${i < arr.stats.length - 1 ? 'arr-stat--bordered' : ''}`}>
-                <div className="arr-stat-value">
-                  <ArroyoCounter value={s.value} prefix={s.prefix || ''} />
-                </div>
-                <div className="arr-stat-label">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section id="pricing" className="arr-section arr-section--dark">
-        <div className="arr-container arr-container--mid">
-          <Animate>
-            <div className="arr-label">{arr.pricing.label}</div>
-            <h2 className="arr-headline">{arr.pricing.headline}</h2>
-            <p className="arr-subtitle">{arr.pricing.subtitle}</p>
-          </Animate>
-          <div className="arr-pricing-grid">
-            {arr.pricing.tiers.map((tier, i) => (
-              <Animate key={i}>
-                <ArroyoPriceCard {...tier} bookingUrl={arr.cta.bookingUrl} />
-              </Animate>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="arr-section arr-section--dark arr-cta-section">
+      {/* Bottom CTA — combined pricing + engage */}
+      <section id="pricing" className="arr-section arr-section--dark arr-cta-section">
         <div className="arr-cta-glow" aria-hidden="true" />
+
+        {/* Desert footer scene */}
+        <div className="arr-footer-scene" aria-hidden="true">
+          <img className="arr-footer-butte arr-footer-butte--1" src="/arroyo-scene/butte-1.png" alt="" />
+          <img className="arr-footer-butte arr-footer-butte--2" src="/arroyo-scene/butte-2.png" alt="" />
+          <img className="arr-footer-saguaro arr-footer-saguaro--1" src="/arroyo-scene/saguaro-1.png" alt="" />
+          <img className="arr-footer-saguaro arr-footer-saguaro--2" src="/arroyo-scene/saguaro-2.png" alt="" />
+          <img className="arr-footer-joshua" src="/arroyo-scene/joshua-1.png" alt="" />
+          <div className="arr-footer-ground" />
+        </div>
+
         <div className="arr-container arr-cta-inner">
           <Animate>
             <div className="arr-cta-label">{arr.cta.label}</div>
@@ -341,18 +260,10 @@ function ArroyoPage() {
             <p className="arr-cta-tagline">{arr.cta.tagline}</p>
           </Animate>
           <Animate>
-            <div className="arr-hero-ctas">
-              <a href={arr.cta.bookingUrl} target="_blank" rel="noopener noreferrer" className="arr-btn arr-btn--primary">
-                {arr.cta.primaryCta} &rarr;
+            <div className="arr-pricing-cta">
+              <a href={arr.cta.bookingUrl} target="_blank" rel="noopener noreferrer" className="arr-btn arr-btn--primary arr-btn--lg">
+                Book a Call &rarr;
               </a>
-              <Link to="/investiture" className="arr-btn arr-btn--outline">
-                {arr.cta.secondaryCta}
-              </Link>
-            </div>
-          </Animate>
-          <Animate>
-            <div className="arr-cta-notify">
-              <NotifyForm variant="dark" tag="arroyo" />
             </div>
           </Animate>
         </div>
