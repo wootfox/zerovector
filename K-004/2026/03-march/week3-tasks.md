@@ -6,7 +6,7 @@
 
 - [x] Compile all findings into a final stress test report: what works, what doesn't, what's missing
 - [x] Prioritize: what 3 changes to Investiture would have the highest impact for non-developer practitioners?
-- [ ] Write 2–3 use case descriptions — realistic scenarios where a facilitator uses vector.md and what they'd need the tool to do
+- [x] Write 2–3 use case descriptions — realistic scenarios where a facilitator uses vector.md and what they'd need the tool to do
 - [ ] Hand off report to Erika and Rin — this feeds the Investiture parameter matrix and Open Vector Track 1 curriculum design directly
 
 ## Stretch
